@@ -136,7 +136,7 @@ class MenusTableSeeder extends Seeder
             'name' => 'sidebar menu'
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
-        $this->insertTitle('manager,admin', 'UAT Version 1');
+        // $this->insertTitle('manager,admin', 'UAT Version 1');
         $this->insertLink('manager,user,admin', 'Dashboard', '/', 'cil-speedometer');
         $this->beginDropdown('admin,manager', 'Access Managment', 'cil-https');
             // $this->insertLink('admin', 'Notes',                   '/notes');
@@ -154,7 +154,7 @@ class MenusTableSeeder extends Seeder
             $this->insertLink('admin,manager', 'Create Project', '/projects/create');
             $this->insertLink('admin,manager', 'List projects', '/projects');
         $this->endDropdown();
-        $this->insertTitle('manager,admin', 'UAT Version 2');
+        $this->insertTitle('manager,admin', 'Stats');
         $this->beginDropdown('admin,manager', 'Audience', 'cil-user');
             $this->insertLink('admin,manager', 'Overview', '/audience/overview', 'cil-home');
             $this->insertLink('admin,manager', 'Devices', '/audience/devices', 'cil-devices');

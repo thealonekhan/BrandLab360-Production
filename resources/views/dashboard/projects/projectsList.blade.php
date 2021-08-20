@@ -18,8 +18,8 @@
                         <thead>
                           <tr>
                             <th>Title</th>
-                            <th>Main-GA-ID</th>
-                            <th>Source-GA-ID</th>
+                            <th>Analytics Project ID</th>
+                            <th>Analytics View ID</th>
                             <th>Status</th>
                             <th></th>
                             <th></th>
@@ -30,8 +30,8 @@
                           @foreach($projects as $project)
                             <tr>
                               <td><strong>{{ $project->title }}</strong></td>
-                              <td>{{ $project->main_analytics_id }}</td>
-                              <td>{{ $project->source_analytics_id }}</td>
+                              <td>{{ $project->analytics_project_id }}</td>
+                              <td>{{ $project->analytics_view_id }}</td>
                               <td>
                                   <span class="{{ $project->status->class }}">
                                       {{ $project->status->name }}

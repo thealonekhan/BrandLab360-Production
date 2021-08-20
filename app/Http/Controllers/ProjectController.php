@@ -50,15 +50,15 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|min:1|max:255',
-            'main_analytics_id' => 'required',
-            'source_analytics_id' => 'required',
+            'analytics_project_id' => 'required',
+            'analytics_view_id' => 'required',
             'status_id' => 'required',
         ]);
         $user = auth()->user();
         $project = new Project();
         $project->title = $request->input('title');
-        $project->main_analytics_id = $request->input('main_analytics_id');
-        $project->source_analytics_id = $request->input('source_analytics_id');
+        $project->analytics_project_id = $request->input('analytics_project_id');
+        $project->analytics_view_id = $request->input('analytics_view_id');
         $project->description = $request->input('description');
         $project->status_id = $request->input('status_id');
         $project->created_by = $user->id;
@@ -103,15 +103,15 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|min:1|max:255',
-            'main_analytics_id' => 'required',
-            'source_analytics_id' => 'required',
+            'analytics_project_id' => 'required',
+            'analytics_view_id' => 'required',
             'status_id' => 'required',
         ]);
         $user = auth()->user();
         $project = Project::find($id);
         $project->title = $request->input('title');
-        $project->main_analytics_id = $request->input('main_analytics_id');
-        $project->source_analytics_id = $request->input('source_analytics_id');
+        $project->analytics_project_id = $request->input('analytics_project_id');
+        $project->analytics_view_id = $request->input('analytics_view_id');
         $project->description = $request->input('description');
         $project->status_id = $request->input('status_id');
         $project->created_by = $user->id;

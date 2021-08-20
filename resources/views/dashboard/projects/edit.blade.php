@@ -19,18 +19,18 @@
                             </div>
 
                             <div class="form-group row">
-                                <label>Main App ID</label>
-                                <input class="form-control" type="text" placeholder="{{ __('Main Google Analytics App Id') }}" name="main_analytics_id" value="{{ $project->main_analytics_id }}" required>
+                                <label>Anlytics Project ID</label>
+                                <input class="form-control" type="text" placeholder="{{ __('Analytics Project Id') }}" name="analytics_project_id" value="{{ $project->analytics_project_id }}" required>
                             </div>
                             
                             <div class="form-group row">
-                                <label>Source App ID</label>
-                                <input class="form-control" type="text" placeholder="{{ __('Source Google Analytics App Id') }}" name="source_analytics_id" value="{{ $project->source_analytics_id }}" required>
+                                <label>Analytics View ID</label>
+                                <input class="form-control" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" value="{{ $project->analytics_view_id }}" required>
                             </div>
 
                             <div class="form-group row">
                                 <label>Description</label>
-                                <textarea class="form-control" id="textarea-input" name="description" rows="9" placeholder="{{ __('Description..') }}" >{{ $project->source_analytics_id }}</textarea>
+                                <textarea class="form-control" id="textarea-input" name="description" rows="9" placeholder="{{ __('Description..') }}" >{{ $project->description }}</textarea>
                             </div>
 
                             <div class="form-group row">

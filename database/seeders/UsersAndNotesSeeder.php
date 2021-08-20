@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\RoleHierarchy;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Project;
 
 class UsersAndNotesSeeder extends Seeder
 {
@@ -77,6 +78,18 @@ class UsersAndNotesSeeder extends Seeder
         $user->assignRole('admin');
         $user->assignRole('manager');
         $user->assignRole('user');
+
+        $project = new Project();
+        $project->title = 'ScentsOfWonderVS';
+        $project->analytics_project_id = 'brandlab360-322614';
+        $project->analytics_view_id = '248962712';
+        $project->description = 'BrandLab ScentsOfWonderVS';
+        $project->status_id = 1;
+        $project->created_by = $user->id;
+        $project->save();
+
+
+
         // for($i = 0; $i<$numberOfUsers; $i++){
         //     $user = User::create([ 
         //         'name' => $faker->name(),

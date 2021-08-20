@@ -13,10 +13,10 @@
                         <br>
                         <dt>Title:</dt>
                         <p> {{ $project->title }}</p>
-                        <dt>Main Google Analytics App Id:</dt> 
-                        <p>{{ $project->main_analytics_id }}</p>
-                        <dt>Source Google Analytics App Id:</dt> 
-                        <p>{{ $project->source_analytics_id }}</p>
+                        <dt>Analytics Project ID:</dt> 
+                        <p>{{ $project->analytics_project_id }}</p>
+                        <dt>Analytics View ID:</dt> 
+                        <p>{{ $project->analytics_view_id }}</p>
                         <dt>Description:</dt> 
                         <p>{{ $project->description }}</p>
                         <dt>Status</dt>
