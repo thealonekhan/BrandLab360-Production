@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Status;
+use App\Models\ProjectManagement;
 
 class ProjectController extends Controller
 {
@@ -25,8 +26,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('status')->paginate( 20 );
-        return view('dashboard.projects.projectsList', ['projects' => $projects]);
+        $you = auth()->user();
+        if ($you->hasRole('admin')) {
+            $projects = Project::with('status')->paginate( 20 );
+            return view('dashboard.projects.projectsList', ['projects' => $projects]);
+        } else {
+
+            $projects = ProjectManagement::with('project')->where('user_id', $you->id)->first();
+            $project = !empty($projects->project) ? $projects->project : null;
+            return view('dashboard.projects.projectShow', [ 'project' => $project ]);
+        }
     }
 
     /**

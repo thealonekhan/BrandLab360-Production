@@ -155,7 +155,7 @@ class MenusTableSeeder extends Seeder
         $this->insertTitle('manager,admin', 'Projects');
         $this->beginDropdown('admin,manager', 'Project Management', 'cil-sitemap');
             $this->insertLink('admin', 'Create Project', '/projects/create');
-            $this->insertLink('admin,manager', 'List projects', '/projects');
+            $this->insertLink('admin,manager', 'Projects', '/projects');
         $this->endDropdown();
         // $this->insertTitle('manager,admin', 'Stats');
         // $this->beginDropdown('admin,manager', 'Audience', 'cil-user');

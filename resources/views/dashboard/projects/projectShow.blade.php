@@ -5,29 +5,43 @@
         <div class="container-fluid">
           <div class="animated fadeIn">
             <div class="row">
-              <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
+              <div class="col-sm-12 col-md-10 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i> Note: {{ $project->title }}</div>
+                      <i class="fa fa-align-justify"></i>{{ $project->title }}</div>
                     <div class="card-body">
-                        <br>
-                        <dt>Title:</dt>
-                        <p> {{ $project->title }}</p>
-                        <dt>Analytics Project ID:</dt> 
-                        <p>{{ $project->analytics_project_id }}</p>
-                        <dt>Analytics View ID:</dt> 
-                        <p>{{ $project->analytics_view_id }}</p>
-                        <dt>Description:</dt> 
-                        <p>{{ $project->description }}</p>
-                        <dt>Status</dt>
-                        <p>
-                            <span class="{{ $project->status->class }}">
+                        <table class="table table-responsive-sm table-striped">
+                        <tbody>
+                          <tr>
+                            <td><strong>Project Title</strong></td>
+                            <td>{{ $project->title }}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Analytics Project ID</strong></td>
+                            <td>{{ $project->analytics_project_id }}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Analytics View ID</strong></td>
+                            <td>{{ $project->analytics_view_id }}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Description</strong></td>
+                            <td>{{ $project->description }}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Status</strong></td>
+                            <td><span class="{{ $project->status->class }}">
                               {{ $project->status->name }}
                             </span>
-                        </p>
-                        <dt>Created By:</dt>
-                        <p> {{ $project->owner->name }}</p>
-                        <a href="{{ route('projects.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Created By</strong></td>
+                            <td>{{ $project->owner->name }}</td>
+                          </tr>
+                        </tbody>
+                        </table>
+
                     </div>
                 </div>
               </div>
