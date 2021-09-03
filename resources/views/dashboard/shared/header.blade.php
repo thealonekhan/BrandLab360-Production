@@ -73,7 +73,7 @@
                 <a class="dropdown-item" href="{{url('/projects')}}">
                 <svg class="c-icon mr-2">
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-file') }}"></use> -->
-                </svg> Projects<span class="badge badge-primary ml-auto">\App\Models\Project::count()</span></a>
+                </svg> Projects<span class="badge badge-primary ml-auto">{{\App\Models\Project::count()}}</span></a>
                 @endif
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">
