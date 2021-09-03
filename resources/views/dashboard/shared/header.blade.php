@@ -69,10 +69,12 @@
                 <svg class="c-icon mr-2">
                   <use xlink:href="{{ url('/icons/sprites/free.svg#cil-credit-card') }}"></use>
                 </svg> Payments<span class="badge badge-secondary ml-auto">42</span></a> -->
+                @if(auth()->user()->hasRole('admin')) 
                 <a class="dropdown-item" href="{{url('/projects')}}">
                 <svg class="c-icon mr-2">
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-file') }}"></use> -->
-                </svg> Projects<span class="badge badge-primary ml-auto">42</span></a>
+                </svg> Projects<span class="badge badge-primary ml-auto">\App\Models\Project::count()</span></a>
+                @endif
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">
                 <svg class="c-icon mr-2">
