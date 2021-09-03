@@ -12,7 +12,7 @@ use App\Http\Controllers\ApplicationController;
 */
 
 Route::group(['middleware' => ['get.menu']], function () {
-    Route::get('/', [ApplicationController::class, 'index']);
+    Route::any('/', [ApplicationController::class, 'index'])->name('dashboard.overview.ajax');
     Route::any('/audience/overview', 'AudienceController@overview')->name('audience.overview.ajax');
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');
     Route::any('/behavior/event/overview', 'BehaviorController@overview')->name('behavior.overview.ajax');
@@ -34,7 +34,6 @@ Route::group(['middleware' => ['get.menu']], function () {
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::resource('roles', 'RolesController');
-        Route::resource('projects', 'ProjectController');
         Route::get('/roles/move/move-up', 'RolesController@moveUp')->name('roles.up');
         Route::get('/roles/move/move-down', 'RolesController@moveDown')->name('roles.down');
         Route::prefix('menu/element')->group(function () { 
@@ -58,7 +57,8 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/delete', 'MenuController@delete')->name('menu.menu.delete');
         });
     });
-    Route::group(['middleware' => ['role:admin', 'role:manager']], function () {
+    Route::middleware(['role:admin|manager'])->group(function () {
         Route::resource('users', 'UsersController');
+        Route::resource('projects', 'ProjectController');
     });
 });

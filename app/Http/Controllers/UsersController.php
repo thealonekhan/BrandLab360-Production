@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Project;
+use App\Models\ProjectManagement;
 
 class UsersController extends Controller
 {
@@ -18,7 +20,8 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin');
+        // $this->middleware('admin');
+        // $this->middleware('manager');
     }
 
     /**
@@ -28,8 +31,14 @@ class UsersController extends Controller
      */
     public function index()
     {
+        // dd(auth()->user()->getRoleNames());
         $you = auth()->user();
-        $users = User::all();
+        if ($you->hasRole('admin')) {
+            $users = User::all();
+        } else {
+            // $users = User::find($you->id)->whereHas("roles", function($q){ $q->where("name", "manager")->orWhere("name", "user"); })->get();
+            $users = User::where('created_by', $you->id)->get();
+        }
         return view('dashboard.admin.usersList', compact('users', 'you'));
     }
 
@@ -41,27 +50,43 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('dashboard.admin.userCreateForm', compact( 'roles' ));
+        $you = auth()->user();
+        if ($you->hasRole('manager')) {
+            $roles = Role::where('name', '!=', 'admin')->get();
+            $projects = ProjectManagement::with('project')->where('user_id', $you->id)->first();
+        } else {
+            $roles = Role::all();
+            $projects = Project::all();
+        }
+        return view('dashboard.admin.userCreateForm', compact( 'roles', 'projects' ));
     }
     
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|min:1|max:255',
             'email' => 'required',
             'menuroles' => 'required',
             'password' => 'required',
+            'project_id' => 'required'
         ]);
-        $user = auth()->user();
+        $you = auth()->user();
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->menuroles = $request->input('menuroles');
+        $user->created_by = $you->id;
         $user->save();
         
         $user->assignRole($request->input('menuroles'));
+
+        $projectManagement = new ProjectManagement();
+        $projectManagement->user_id = $user->id;
+        $projectManagement->project_id = $request->input('project_id');
+        $projectManagement->created_by = $you->id;
+        $projectManagement->save();
 
         $request->session()->flash('message', 'Successfully created user');
         return redirect()->route('users.index');
@@ -70,7 +95,10 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('dashboard.admin.userShow', compact( 'user' ));
+        $you = auth()->user();
+        $roles = Role::all();
+        $projects = ProjectManagement::with('project')->where('user_id', $id)->first();
+        return view('dashboard.admin.userShow', compact( 'user', 'projects' ));
     }
 
     /**
@@ -82,8 +110,15 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::all();
-        return view('dashboard.admin.userEditForm', compact('user', 'roles'));
+        $you = auth()->user();
+        if ($you->hasRole('manager')) {
+            $roles = Role::where('name', '!=', 'admin')->get();
+            $projects = ProjectManagement::with('project')->where('user_id', $you->id)->first();
+        } else {
+            $projects = Project::all();
+            $roles = Role::all();
+        }
+        return view('dashboard.admin.userEditForm', compact('user', 'roles', 'projects'));
     }
 
     /**
@@ -122,6 +157,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         if($user){
+            ProjectManagement::where('user_id', $id)->delete();
             foreach ($user->getRoleNames() as $key => $value) {
                 $user->removeRole($value);
             }

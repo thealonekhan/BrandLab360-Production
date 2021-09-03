@@ -42,7 +42,7 @@
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">@</span>
+                                    <span class="input-group-text">Role</span>
                                 </div>
                               <select class="form-control" name="menuroles" id="menuroles">
                                   @foreach($roles as $role)
@@ -52,6 +52,20 @@
                                           <option value="{{ $role->name }}">{{ $role->name }}</option>
                                       @endif
                                   @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Project</span>
+                                </div>
+                              <select class="form-control" name="project_id" id="project">
+                                @if(!empty($projects->project))
+                                  <option value="{{ $projects->project->id }}">{{ $projects->project->title }}</option>
+                                @else
+                                  @foreach($projects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->title }}</option>
+                                  @endforeach
+                                @endif
                                 </select>
                             </div>
                             <button class="btn btn-block btn-success" type="submit">{{ __('Save') }}</button>

@@ -4,7 +4,7 @@
 
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
@@ -43,7 +43,7 @@
                     </div>
               </div>
             </div>
-            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+            <!-- <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
               <div class="card-body text-center">
                 <div>
                   <h2>Sign up</h2>
@@ -53,7 +53,7 @@
                   @endif
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

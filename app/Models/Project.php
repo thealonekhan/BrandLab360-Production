@@ -14,10 +14,10 @@ class Project extends Model
     /**
      * Get the User that owns the Notes.
      */
-    public function project_managment()
-    {
-        return $this->belongsTo('App\Models\ProjectManagment', 'project_id')->withTrashed();
-    }
+    // public function project_managment()
+    // {
+    //     return $this->belongsTo('App\Models\ProjectManagment', 'project_id')->withTrashed();
+    // }
 
     /**
      * Get the User that created this project.

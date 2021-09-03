@@ -9,14 +9,14 @@ class ProjectManagement extends Model
 {
     use HasFactory;
 
-    protected $table = 'project_managment';
+    protected $table = 'project_management';
 
     /**
      * Get the Projects that owns the Managment.
      */
     public function project()
     {
-        return $this->belongsTo('App\Models\Project', 'project_id')->withTrashed();
+        return $this->belongsTo('App\Models\Project', 'project_id');
     }
 
     /**
@@ -24,6 +24,6 @@ class ProjectManagement extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id')->withTrashed();
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }

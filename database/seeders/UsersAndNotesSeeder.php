@@ -73,11 +73,12 @@ class UsersAndNotesSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('admin@ga'),
             'remember_token' => Str::random(10),
-            'menuroles' => 'user,admin,manager' 
+            'menuroles' => 'admin',
+            'created_by' => 1
         ]);
         $user->assignRole('admin');
-        $user->assignRole('manager');
-        $user->assignRole('user');
+        // $user->assignRole('manager');
+        // $user->assignRole('user');
 
         $project = new Project();
         $project->title = 'ScentsOfWonderVS';

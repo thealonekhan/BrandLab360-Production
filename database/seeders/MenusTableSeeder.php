@@ -74,6 +74,9 @@ class MenusTableSeeder extends Seeder
         if(in_array('user', $roles)){
             $this->userRole->givePermissionTo($permission);
         }
+        if(in_array('manager', $roles)){
+            $this->adminRole->givePermissionTo($permission);
+        }
         if(in_array('admin', $roles)){
             $this->adminRole->givePermissionTo($permission);
         }
@@ -138,31 +141,31 @@ class MenusTableSeeder extends Seeder
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
         // $this->insertTitle('manager,admin', 'UAT Version 1');
         $this->insertLink('manager,user,admin', 'Dashboard', '/', 'cil-speedometer');
-        $this->beginDropdown('admin,manager', 'Access Managment', 'cil-https');
+        $this->beginDropdown('manager,admin', 'Access Management', 'cil-https');
             // $this->insertLink('admin', 'Notes',                   '/notes');
-            $this->insertLink('admin', 'Users',                   '/users');
-            $this->insertLink('admin', 'Roles',              '/roles');
-            $this->insertLink('admin', 'Edit menu',               '/menu/menu');
-            $this->insertLink('admin', 'Edit menu elements',      '/menu/element');
+            $this->insertLink('admin,manager', 'Users', '/users');
+            $this->insertLink('admin', 'Roles', '/roles');
+            $this->insertLink('admin', 'Edit menu', '/menu/menu');
+            $this->insertLink('admin', 'Edit menu elements', '/menu/element');
             // $this->insertLink('admin', 'Media',                   '/media');
             // $this->insertLink('admin', 'BREAD',                   '/bread');
             // $this->insertLink('admin', 'Email',                   '/mail');
         $this->endDropdown();
-        $this->insertLink('user', 'Login', '/login', 'cil-account-logout');
+        // $this->insertLink('user', 'Login', '/login', 'cil-account-logout');
         $this->insertTitle('manager,admin', 'Projects');
         $this->beginDropdown('admin,manager', 'Project Management', 'cil-sitemap');
-            $this->insertLink('admin,manager', 'Create Project', '/projects/create');
+            $this->insertLink('admin', 'Create Project', '/projects/create');
             $this->insertLink('admin,manager', 'List projects', '/projects');
         $this->endDropdown();
-        $this->insertTitle('manager,admin', 'Stats');
-        $this->beginDropdown('admin,manager', 'Audience', 'cil-user');
-            $this->insertLink('admin,manager', 'Overview', '/audience/overview', 'cil-home');
-            $this->insertLink('admin,manager', 'Devices', '/audience/devices', 'cil-devices');
-        $this->endDropdown();
-        $this->beginDropdown('admin,manager', 'Behavior', 'cil-view-quilt');
-            $this->insertLink('admin,manager', 'Events Overview', '/behavior/event/overview', 'cil-home');
-            // $this->insertLink('admin,manager', 'Top Events', '/behavior/event/topevents', 'cil-home');
-        $this->endDropdown();
+        // $this->insertTitle('manager,admin', 'Stats');
+        // $this->beginDropdown('admin,manager', 'Audience', 'cil-user');
+        //     $this->insertLink('admin,manager', 'Overview', '/audience/overview', 'cil-home');
+        //     $this->insertLink('admin,manager', 'Devices', '/audience/devices', 'cil-devices');
+        // $this->endDropdown();
+        // $this->beginDropdown('admin,manager', 'Behavior', 'cil-view-quilt');
+        //     $this->insertLink('admin,manager', 'Events Overview', '/behavior/event/overview', 'cil-home');
+        //     $this->insertLink('admin,manager', 'Top Events', '/behavior/event/topevents', 'cil-home');
+        // $this->endDropdown();
         
         
         // $this->insertLink('user', 'Register', '/register', 'cil-account-logout');
@@ -221,8 +224,8 @@ class MenusTableSeeder extends Seeder
             'name' => 'top menu'
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
-        $this->beginDropdown('guest,user,admin', 'Pages');
-        $id = $this->insertLink('guest,user,admin', 'Dashboard',    '/');
+        $this->beginDropdown('manager,user,admin', 'Pages');
+        $id = $this->insertLink('manager,user,admin', 'Dashboard',    '/');
         // $id = $this->insertLink('user,admin', 'Notes',              '/notes');
         $id = $this->insertLink('admin', 'Users',                   '/users');
         $this->endDropdown();

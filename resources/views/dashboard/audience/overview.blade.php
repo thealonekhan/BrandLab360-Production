@@ -37,15 +37,15 @@
                     </svg>
                     </button>
                     <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-                    <label class="btn btn-outline-secondary active">
-                        <input id="option1" type="radio" name="options" autocomplete="off" value="ga:date" checked> Day
-                    </label>
-                    <label class="btn btn-outline-secondary">
-                        <input id="option2" type="radio" name="options" autocomplete="off" value="ga:yearMonth"> Month
-                    </label>
-                    <label class="btn btn-outline-secondary">
-                        <input id="option3" type="radio" name="options" autocomplete="off" value="ga:year"> Year
-                    </label>
+                        <label class="btn btn-outline-secondary active">
+                            <input id="option1" type="radio" name="options" autocomplete="off" value="ga:date" checked> Day
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input id="option2" type="radio" name="options" autocomplete="off" value="ga:yearMonth"> Month
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input id="option3" type="radio" name="options" autocomplete="off" value="ga:year"> Year
+                        </label>
                     </div>
                 </div>
                 <!-- /.col-->

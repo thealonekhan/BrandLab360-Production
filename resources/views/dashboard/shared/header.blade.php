@@ -10,12 +10,19 @@
             if(isset($appMenus['top menu'])){
                 FreelyPositionedMenus::render( $appMenus['top menu'] , 'c-header-', 'd-md-down-none');
             }
-        ?> 
-         <select class="form-control mt-2" name="" style="width:30%">
+        ?>
+        @if(auth()->user()->hasRole('admin')) 
+          <select class="form-control mt-2" name="" style="width:30%">
             @foreach(\App\Models\Project::get()->pluck('title', 'id')->toArray() as $key => $project)
                 <option value="{{ $key }}">{{ $project }}</option>
             @endforeach
-        </select>
+          </select>
+        @else
+        <?php $projects = \App\Models\ProjectManagement::with('project')->where('user_id', auth()->user()->id)->first();?>
+          <select class="form-control mt-2" name="" style="width:30%">
+            <option value="{{ $projects->project->id }}">{{ $projects->project->title }}</option>
+          </select>
+        @endif
         <ul class="c-header-nav ml-auto mr-4">
           <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link">
               <svg class="c-icon">
@@ -30,7 +37,7 @@
                 <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-envelope-open') }}"></use> -->
               </svg></a></li>
           <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              <div class="c-avatar"><img class="c-avatar-img" src="{{ url('/assets/img/avatars/7.jpg') }}" alt="user@email.com"></div>
+              <div class="c-avatar"><img class="c-avatar-img" src="{{ url('/assets/img/avatars/icons8-user-64.png') }}" alt="user@email.com"></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
               <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
