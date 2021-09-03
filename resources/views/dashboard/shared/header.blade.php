@@ -11,6 +11,7 @@
                 FreelyPositionedMenus::render( $appMenus['top menu'] , 'c-header-', 'd-md-down-none');
             }
         ?>
+        @if(!empty(auth()->user()) )
         @if(auth()->user()->hasRole('admin')) 
           <select class="form-control mt-2" name="" style="width:30%">
             @foreach(\App\Models\Project::get()->pluck('title', 'id')->toArray() as $key => $project)
@@ -22,6 +23,7 @@
           <select class="form-control mt-2" name="" style="width:30%">
             <option value="{{ $projects->project->id }}">{{ $projects->project->title }}</option>
           </select>
+        @endif
         @endif
         <ul class="c-header-nav ml-auto mr-4">
           <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link">
