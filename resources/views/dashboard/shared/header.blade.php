@@ -38,6 +38,9 @@
               <svg class="c-icon">
                 <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-envelope-open') }}"></use> -->
               </svg></a></li>
+          <li class="c-header-nav-item d-md-down-none mx-2">
+            <strong>{{Illuminate\Support\Str::of(Illuminate\Support\Str::limit(auth()->user()->name, 20))->title()}}</strong>
+          </li>
           <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
               <div class="c-avatar"><img class="c-avatar-img" src="{{ url('/assets/img/avatars/icons8-user-64.png') }}" alt="user@email.com"></div>
             </a>
