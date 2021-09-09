@@ -24,10 +24,10 @@
                             <td><strong>Analytics View ID</strong></td>
                             <td>{{ $project->analytics_view_id }}</td>
                           </tr>
-                          <tr>
+                          <!-- <tr>
                             <td><strong>Description</strong></td>
                             <td>{{ $project->description }}</td>
-                          </tr>
+                          </tr> -->
                           <tr>
                             <td><strong>Status</strong></td>
                             <td><span class="{{ $project->status->class }}">

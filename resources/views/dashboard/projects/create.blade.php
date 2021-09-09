@@ -27,10 +27,10 @@
                                 <input class="form-control" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" required>
                             </div>
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label>Description</label>
                                 <textarea class="form-control" id="textarea-input" name="description" rows="9" placeholder="{{ __('Description..') }}" ></textarea>
-                            </div>
+                            </div> -->
 
                             <div class="form-group row">
                                 <label>Status</label>

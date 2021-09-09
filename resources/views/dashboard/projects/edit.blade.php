@@ -28,24 +28,22 @@
                                 <input class="form-control" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" value="{{ $project->analytics_view_id }}" required>
                             </div>
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label>Description</label>
                                 <textarea class="form-control" id="textarea-input" name="description" rows="9" placeholder="{{ __('Description..') }}" >{{ $project->description }}</textarea>
-                            </div>
+                            </div> -->
 
                             <div class="form-group row">
-                                <div class="col">
-                                    <label>Status</label>
-                                    <select class="form-control" name="status_id">
-                                        @foreach($statuses as $status)
-                                            @if( $status->id == $project->status_id )
-                                                <option value="{{ $status->id }}" selected="true">{{ $status->name }}</option>
-                                            @else
-                                                <option value="{{ $status->id }}">{{ $status->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <label>Status</label>
+                                <select class="form-control" name="status_id">
+                                    @foreach($statuses as $status)
+                                        @if( $status->id == $project->status_id )
+                                            <option value="{{ $status->id }}" selected="true">{{ $status->name }}</option>
+                                        @else
+                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
  
                             <button class="btn btn-block btn-success" type="submit">{{ __('Save') }}</button>

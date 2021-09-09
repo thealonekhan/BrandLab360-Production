@@ -16,7 +16,7 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>BrandLab360 Analytics</title>
+    <title>{{ !empty(auth()->user()) ? Illuminate\Support\Str::of(Illuminate\Support\Str::limit(auth()->user()->name, 20))->title().' - ' : '' }}BrandLab360 Analytics</title>
     <link rel="apple-touch-icon" sizes="57x57" href="{{url('assets/favicon/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{url('assets/favicon/apple-icon-60x60.png')}}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{url('assets/favicon/apple-icon-72x72.png')}}">
