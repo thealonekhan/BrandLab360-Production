@@ -157,6 +157,7 @@ class MenusTableSeeder extends Seeder
             $this->insertLink('admin', 'Create Project', '/projects/create');
             $this->insertLink('admin,manager', 'Projects', '/projects');
         $this->endDropdown();
+        $this->insertLink('admin', 'Settings', '/settings', 'cil-cog');
         // $this->insertTitle('manager,admin', 'Stats');
         // $this->beginDropdown('admin,manager', 'Audience', 'cil-user');
         //     $this->insertLink('admin,manager', 'Overview', '/audience/overview', 'cil-home');
@@ -229,11 +230,11 @@ class MenusTableSeeder extends Seeder
         // $id = $this->insertLink('user,admin', 'Notes',              '/notes');
         $id = $this->insertLink('admin', 'Users',                   '/users');
         $this->endDropdown();
-        $id = $this->beginDropdown('admin', 'Settings');
+        // $id = $this->beginDropdown('admin', 'Settings');
 
-        $id = $this->insertLink('admin', 'Edit menu',               '/menu/menu');
-        $id = $this->insertLink('admin', 'Edit menu elements',      '/menu/element');
-        $id = $this->insertLink('admin', 'Edit roles',              '/roles');
+        // $id = $this->insertLink('admin', 'Edit menu',               '/menu/menu');
+        // $id = $this->insertLink('admin', 'Edit menu elements',      '/menu/element');
+        // $id = $this->insertLink('admin', 'Edit roles',              '/roles');
         // $id = $this->insertLink('admin', 'Media',                   '/media');
         // $id = $this->insertLink('admin', 'BREAD',                   '/bread');
         $this->endDropdown();

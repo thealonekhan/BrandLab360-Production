@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             UsersAndNotesSeeder::class,
             MenusTableSeeder::class,
             StatusTableSeeder::class,
+            SettingTableSeeder::class,
             // ExampleSeeder::class,
             // BREADSeeder::class,
             // EmailSeeder::class,

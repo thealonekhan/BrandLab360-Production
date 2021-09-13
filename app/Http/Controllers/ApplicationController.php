@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Analytics;
 use Spatie\Analytics\Period;
 use Carbon\Carbon;
+use App\Models\Setting;
 
 class ApplicationController extends Controller
 {
@@ -134,11 +135,12 @@ class ApplicationController extends Controller
             $gaAllTrafficDirect->totalsForAllResults, 
             $gaAllTrafficReferal->totalsForAllResults
         );
-
-        // $eventTabData = $this->setEventRows($eventData);
+        // dd($eventData);
+        $settings = Setting::first();
+        $settingArray = $settings->toArray();
 
         if($request->ajax()){
-            $eventTabView = view('dashboard.home.event-tabs-data', compact('eventData'))->render();
+            $eventTabView = view('dashboard.home.event-tabs-data', compact('eventData', 'settings'))->render();
             return response()->json([
                 'overviewCounts' => $overviewCounts,
                 'overviewData' => $overviewData,
@@ -146,7 +148,9 @@ class ApplicationController extends Controller
                 'matricProperties' => $matricProperties,
                 'devicesData' => $devicesData, 
                 'trafficData' => $trafficData,
-                'eventTabView' => $eventTabView
+                'eventTabView' => $eventTabView,
+                'settings' => $settings,
+                'settingArray' => $settingArray
             ]);
         }
 
@@ -159,7 +163,9 @@ class ApplicationController extends Controller
             'devicesData', 
             'trafficData',
             'gaMatricIndexArray',
-            'eventData'
+            'eventData',
+            'settings',
+            'settingArray'
         ));
         
     }

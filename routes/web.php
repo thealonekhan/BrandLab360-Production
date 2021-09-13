@@ -56,6 +56,7 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::post('/update', 'MenuController@update')->name('menu.menu.update');
             Route::get('/delete', 'MenuController@delete')->name('menu.menu.delete');
         });
+        Route::resource('settings', 'SettingController');
     });
     Route::middleware(['role:admin|manager'])->group(function () {
         Route::resource('users', 'UsersController');

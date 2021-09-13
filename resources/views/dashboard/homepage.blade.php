@@ -2,81 +2,36 @@
 
 @section('content')
 
+<div class="loading">Loading&#8230;</div>
+
 <div class="container-fluid">
 	<div class="fade-in">
 		
 		
+		@if($settings->showFilters)
+			@include('dashboard.home.filter')
+		@endif
 
-		@include('dashboard.home.filter')
-		@include('dashboard.home.top-counts')
+		@if($settings->showTopCards)
+			@include('dashboard.home.top-counts')
+		@endif
 
-		<div class="card">
-	        <div class="card-body">
-	            <div class="row">
-	                <div class="col-sm-5">
-	                    <h4 class="card-title mb-0">Overview</h4>
-	                    <div class="small text-muted"></div>
-	                </div>
-	                <!-- /.col-->
-	                <!-- /.col-->
-	            </div>
-	            <!-- /.row-->
-	            <div id="graph-spinner"></div>
-	            <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-	            <canvas class="chart" id="overview-chart" height="300"></canvas>
-	            </div>
-	        </div>
-	        <div class="card-footer">
-	            <div class="row text-center">
-	                <div class="col-md-6 col-sm-6">
-	                    <div class="row">
-	                        <div class="col-md-6 col-sm-12 col-md mb-sm-5 mb-0">
-	                            <div class="text-muted">New Users</div><strong class="newUserCount">{{$overviewCounts['ga:newUsers']}}</strong>
-	                            <div class="progress progress-xs mt-2">
-	                                <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-	                            </div>
-	                        </div>
-	                        <div class="col-md-6 col-sm-12 col-md mb-sm-5 mb-0">
-	                            <div class="text-muted">Sessions</div><strong class="sessionCount">{{$overviewCounts['ga:sessions']}}</strong>
-	                            <div class="progress progress-xs mt-2">
-	                                <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="row">
-	                        <div class="col-md-6 col-sm-12 col-md mb-sm-5 mb-0">
-	                            <div class="text-muted">Avg. Session Duration</div><strong class="sessionDurationCount">{{gmdate("H:i:s", $overviewCounts['ga:avgSessionDuration'])}}</strong>
-	                            <div class="progress progress-xs mt-2">
-	                                <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-	                            </div>
-	                        </div>
-	                        <div class="col-md-6 col-sm-12 col-md mb-sm-5 mb-0">
-	                            <div class="text-muted">Bounce Rate</div><strong class="bounceRateCount">{{round($overviewCounts['ga:bounceRate'],2)}}%</strong>
-	                            <div class="progress progress-xs mt-2">
-	                                <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="col-md-6 col-sm-6">
-	                    <div class="c-chart-wrapper">
-	                        <canvas id="visitors-canvas"></canvas>
-	                    </div>
-	                </div>			
-	            </div>
-	        </div>
-        </div>
+		@if($settings->showOverview)
+			@include('dashboard.home.overview', ['overviewCounts' => $overviewCounts])
+		@endif
 
-    	</div>
+		@if($settings->showEvents)
     	<div class="row">
     		<div class="col-md-12 mb-4" id="event-tab-data">
-    		@include('dashboard.home.event-tabs-data', ['eventData' => $eventData])
+    		@include('dashboard.home.event-tabs-data', ['eventData' => $eventData, 'settings' => $settings])
     		</div>
     	</div>
+		@endif
 		<!-- /.row -->
 
 		<div class="row">
-			<div class="col-sm-6 col-md-6">
+			@if($settings->showDeviceChart)
+			<div class="col-sm-12 col-md-6">
 				<div class="card">
 					<div class="card-header">Devices
 						<div class="card-header-actions"></div>
@@ -88,7 +43,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-6">
+			@endif
+			@if($settings->showTrafficChart)
+			<div class="col-sm-12 col-md-6">
 				<div class="card">
 					<div class="card-header">Traffic
 						<div class="card-header-actions"></div>
@@ -100,6 +57,7 @@
 					</div>
 				</div>
 			</div>
+			@endif
 		</div>
 		<!-- /.row-->
 
@@ -108,13 +66,15 @@
 
 <style>
 
-    .spinner-border{
+    /* .spinner-border{
         position: absolute;
         left: 50%;
         top: 30%;
         width: 4rem;
         height: 4rem;
-    }
+    } */
+
+	
 
 </style>
 
@@ -126,6 +86,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}" />
 <script src="{{ asset('js/Chart.min.js') }}"></script>
 <script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
 <script src="{{ asset('js/dashboard.js') }}"></script>
@@ -154,7 +115,7 @@ let visitorsDataRaw = [
 let matricProps = [
     "{{$matricProperties['name']}}", 
     "{{$matricProperties['symbol']}}"];
-
+let settings = {!! str_replace('&quot;', '', json_encode($settingArray)) !!};
 
 	$('input[name="daterange"]').daterangepicker({
 	    timePicker: false,
@@ -193,7 +154,7 @@ let matricProps = [
 	});
 
 	function sendRequest(_token, dateRanges, quickDateOption, gaMatric) {
-        $("#graph-spinner").html('');
+        $(".loading").hide();
         $.ajaxSetup({
             // headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
         });
@@ -202,10 +163,10 @@ let matricProps = [
             type:'POST',
             data: {_token:_token, option:quickDateOption, daterange:dateRanges, gamatric:gaMatric},
             beforeSend: function(){
-                $("#graph-spinner").html('<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>');
+                $(".loading").show();
             },
             success: function(data) {
-                $("#graph-spinner").html('');
+                $(".loading").hide();
                 updateCounts(data.overviewCounts);
                 var overviewDataLabel = [];
                 var overviewData = [];
@@ -229,7 +190,7 @@ let matricProps = [
 
                 var matricProps = [data.matricProperties['name'], data.matricProperties['symbol']];
 
-                buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, true, matricProps);
+                buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, true, matricProps, data.settingArray);
                 
             }
         });
@@ -237,9 +198,9 @@ let matricProps = [
     }
 
     // Build Charts for overview
-    buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, false, matricProps);
+    buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, false, matricProps, settings);
 
-    function buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, update = false, matricProps) {
+    function buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, update = false, matricProps, settings) {
         // Backend.customToolTip.overview = 15;
         Backend.Chart.deviceDoughnutChart.data.datasets[0].data = devicesDataRaw;
 		Backend.Chart.trafficDoughnutChart.data.datasets[0].data = trafficDataRaw;
@@ -267,7 +228,7 @@ let matricProps = [
             }
         }
         Backend.Chart.visitorChart.data.datasets[0].data = [visitorsDataRaw[0], visitorsDataRaw[2]];
-        Backend.Chart.init(update);
+        Backend.Chart.init(update, settings);
     }
 
     function updateCounts(data) {
