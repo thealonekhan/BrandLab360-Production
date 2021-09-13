@@ -28,35 +28,35 @@
 
                                     <div class="form-group row">
                                         <label class="mr-4"><strong>Show Filters:</strong></label>
-                                        <label class="c-switch c-switch-label c-switch-success">
+                                        <label class="c-switch c-switch-label c-switch-info">
                                             <input name="showFilters" class="c-switch-input" type="checkbox" {{ $settings->showFilters ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                         </label>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="mr-4"><strong>Show Top Cards:</strong></label>
-                                        <label class="c-switch c-switch-label c-switch-success">
+                                        <label class="c-switch c-switch-label c-switch-info">
                                             <input name="showTopCards" class="c-switch-input" type="checkbox" {{ $settings->showTopCards ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                         </label>
                                     </div>
                                     
                                     <div class="form-group row">
                                         <label class="mr-4"><strong>Show Overview:</strong></label>
-                                        <label class="c-switch c-switch-label c-switch-success">
+                                        <label class="c-switch c-switch-label c-switch-info">
                                             <input name="showOverview" class="c-switch-input" type="checkbox" {{ $settings->showOverview ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                         </label>
                                     </div>
                                     
                                     <div class="form-group row">
                                         <label class="mr-4"><strong>Show Traffic Chart:</strong></label>
-                                        <label class="c-switch c-switch-label c-switch-success">
+                                        <label class="c-switch c-switch-label c-switch-info">
                                             <input name="showTrafficChart" class="c-switch-input" type="checkbox" {{ $settings->showTrafficChart ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                         </label>
                                     </div>
                                     
                                     <div class="form-group row">
                                         <label class="mr-4"><strong>Show Device Chart:</strong></label>
-                                        <label class="c-switch c-switch-label c-switch-success">
+                                        <label class="c-switch c-switch-label c-switch-info">
                                             <input name="showDeviceChart" class="c-switch-input" type="checkbox" {{ $settings->showDeviceChart ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                         </label>
                                     </div>
