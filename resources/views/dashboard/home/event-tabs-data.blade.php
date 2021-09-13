@@ -1,3 +1,4 @@
+@if($settings->eventTabs != "null")
 <div class="nav-tabs-boxed">
     <ul class="nav nav-tabs" role="tablist">
         @foreach(json_decode($settings->eventTabs) as $key => $tabs)
@@ -33,3 +34,4 @@
         @endforeach
     </div>
 </div>
+@endif

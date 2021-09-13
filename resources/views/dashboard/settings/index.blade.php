@@ -85,8 +85,16 @@
                                         <div class="col-md-9">
                                             <div class="row">
                                             @foreach($eventsTabs as $tab)
+                                                <?php 
+                                                    $checked = '';
+                                                    // dd($settings->eventTabs);
+                                                    if($settings->eventTabs != "null") {
+                                                        // dd($settings->eventTabs);
+                                                        $checked = in_array($tab, json_decode($settings->eventTabs)) ? "checked" : "";
+                                                    }
+                                                ?>
                                                 <div class="form-check checkbox col-md-4">
-                                                    <input class="form-check-input" id="{{$tab}}" name="eventTabs[]" type="checkbox" value="{{$tab}}" {{ in_array($tab, json_decode($settings->eventTabs)) ? "checked" : "" }}>
+                                                    <input class="form-check-input" id="{{$tab}}" name="eventTabs[]" type="checkbox" value="{{$tab}}" {{ $checked }}>
                                                     <label class="form-check-label" for="{{$tab}}">{{$tab}}</label>
                                                 </div>
                                             @endforeach
