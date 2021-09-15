@@ -32,7 +32,7 @@
 
                                     <ul class="list-group">
                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                            <label class="mr-4 mb-0"><strong>Filters:</strong></label>
+                                            <label class="mr-5 mb-0"><strong>Filters:</strong></label>
                                             <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
                                                 <input name="filters" class="c-switch-input filter-head" type="checkbox" {{ $config->filters->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                             </label>
