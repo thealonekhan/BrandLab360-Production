@@ -13,7 +13,7 @@
         ?>
         @if(!empty(auth()->user()) )
         @if(auth()->user()->hasRole('admin')) 
-          <select class="form-control mt-2" name="" style="width:30%">
+          <select class="form-control mt-2" name="project-selection" style="width:30%" id="project-selection">
             @foreach(\App\Models\Project::get()->pluck('title', 'id')->toArray() as $key => $project)
                 <option value="{{ $key }}">{{ $project }}</option>
             @endforeach

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\RoleHierarchy;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Project;
+use App\Models\ProjectManagement;
 
 class UsersAndNotesSeeder extends Seeder
 {
@@ -88,6 +89,13 @@ class UsersAndNotesSeeder extends Seeder
         $project->status_id = 1;
         $project->created_by = $user->id;
         $project->save();
+
+        $projectManagement = new ProjectManagement();
+        $projectManagement->user_id = $user->id;
+        $projectManagement->project_id = $project->id;
+        $projectManagement->created_by = $user->id;
+        $projectManagement->enabled = true;
+        $projectManagement->save();
 
 
 

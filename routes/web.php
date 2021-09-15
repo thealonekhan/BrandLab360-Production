@@ -17,6 +17,7 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');
     Route::any('/behavior/event/overview', 'BehaviorController@overview')->name('behavior.overview.ajax');
     Route::resource('settings', 'SettingController');
+    Route::any('/select-project', [ApplicationController::class, 'selectProject'])->name('dashboard.project.ajax');
     // Route::any('/behavior/event/topevents', 'BehaviorController@topevents')->name('behavior.topevents.ajax');
     Route::group(['middleware' => ['role:user']], function () {
         

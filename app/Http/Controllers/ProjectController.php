@@ -72,6 +72,14 @@ class ProjectController extends Controller
         $project->status_id = $request->input('status_id');
         $project->created_by = $user->id;
         $project->save();
+
+        $projectManagement = new ProjectManagement();
+        $projectManagement->user_id = $user->id;
+        $projectManagement->project_id = $project->id;
+        $projectManagement->created_by = $user->id;
+        $projectManagement->enabled = false;
+        $projectManagement->save();
+
         $request->session()->flash('message', 'Successfully created project');
         return redirect()->route('projects.index');
     }
@@ -139,6 +147,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if($project){
+            ProjectManagement::find($project->id)->delete();
             $project->delete();
         }
         return redirect()->route('projects.index');

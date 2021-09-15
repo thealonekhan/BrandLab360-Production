@@ -39,6 +39,7 @@
     <link href="{{ asset('css/flag.min.css') }}" rel="stylesheet"> <!-- icons -->
     <!-- Main styles for this application-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}" />
 
     @yield('css')
 
@@ -63,6 +64,7 @@
 
 
   <body class="c-app">
+  
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
 
       @include('dashboard.shared.nav-builder')
@@ -72,11 +74,12 @@
       <div class="c-body">
 
         <main class="c-main">
-
+          <div class="loading">Loading&#8230;</div>
           @yield('content') 
 
         </main>
         @include('dashboard.shared.footer')
+        <input type="hidden" name="_projectToken" value="{{csrf_token()}}">
       </div>
     </div>
 
@@ -85,8 +88,33 @@
     <!-- CoreUI and necessary plugins-->
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     <script src="{{ asset('js/coreui-utils.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     @yield('javascript')
-
+    
+    <script type="text/javascript">
+      	$(document).ready(function(){
+          	$("#project-selection").on("change", function(){
+				var selectedProject = $(this).val();
+				var _token = $("input[name='_projectToken']").val();
+				$(".loading").hide();
+				$.ajaxSetup({
+					// headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+				});
+				jQuery.ajax({
+					url: "{{ route('dashboard.project.ajax') }}",
+					type:'POST',
+					data: {_token:_token, project:selectedProject},
+					beforeSend: function(){
+						$(".loading").show();
+					},
+					success: function(data) {
+						$(".loading").hide();
+						location.reload();
+					}
+				});
+          	});
+      	});
+    </script>
 
 
 

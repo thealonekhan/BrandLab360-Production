@@ -87,6 +87,7 @@ class UsersController extends Controller
         $projectManagement->user_id = $user->id;
         $projectManagement->project_id = $request->input('project_id');
         $projectManagement->created_by = $you->id;
+        $projectManagement->enabled = true;
         $projectManagement->save();
 
         $this->createSettings($user->id);

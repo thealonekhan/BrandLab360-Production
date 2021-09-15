@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use Analytics;
 use Spatie\Analytics\Period;
+use AnalyticsHelper;
 
 class SettingController extends Controller
 {
@@ -14,9 +15,10 @@ class SettingController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AnalyticsHelper $helper)
     {
         $this->middleware('auth');
+        $this->helper = $helper;
     }
 
     /**
@@ -26,8 +28,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-
-        $eventData = Analytics::performQuery(Period::days(365),
+        $analytics = $this->helper->getView('248962712');
+        $eventData = $analytics->performQuery(Period::days(365),
         'ga:totalEvents', [
             'dimensions' => 'ga:eventCategory,ga:eventLabel'
         ]);

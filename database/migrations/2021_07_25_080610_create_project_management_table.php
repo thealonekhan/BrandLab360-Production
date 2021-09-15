@@ -18,6 +18,7 @@ class CreateProjectManagementTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('project_id')->unsigned();
             $table->integer('created_by')->unsigned();
+            $table->boolean('enabled')->nullable();
             $table->timestamps();
         });
     }

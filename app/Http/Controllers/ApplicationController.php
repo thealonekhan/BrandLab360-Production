@@ -8,19 +8,25 @@ use Analytics;
 use Spatie\Analytics\Period;
 use Carbon\Carbon;
 use App\Models\Setting;
+use AnalyticsHelper;
+use App\Models\ProjectManagement;
+use DB;
 
 class ApplicationController extends Controller
 {
+    private $helper;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AnalyticsHelper $helper)
     {
         $this->middleware('auth');
+        $this->helper = $helper;
     }
-    
+
+        
     public function index(Request $request)
     {
         $devicesData = [];
@@ -77,18 +83,29 @@ class ApplicationController extends Controller
 
         }
 
+        $projectAnalytics = ProjectManagement::with('project')
+        ->where('user_id', auth()->user()->id)
+        ->where('enabled', true)
+        ->first();
+        if (!$projectAnalytics) {
+            return view('dashboard.homepage-nodata');
+        }
+        $analytics = $this->helper->getView($projectAnalytics->project->analytics_view_id);
+
         // Total Counts for sessions, pageviews, bounceRate, users, avgSessionDuration
-        $gaAudienceOverViews = Analytics::performQuery($gaDateLimit,
+        $gaAudienceOverViews = $analytics->performQuery($gaDateLimit,
         'ga:sessions,ga:bounceRate,ga:newUsers,ga:avgSessionDuration,ga:users,ga:newVisits,ga:pageViews', [
             'dimensions' => $gaOverviewDimentions
         ]);
 
-        $gaAudienceOverViewsPercentage = Analytics::performQuery($gaDateLimit,
+        // dd($gaAudienceOverViews);
+
+        $gaAudienceOverViewsPercentage = $analytics->performQuery($gaDateLimit,
         'ga:percentNewVisits,ga:users', [
             'dimensions' => 'ga:userType'
         ]);
 
-        $eventData = Analytics::performQuery($gaDateLimit,
+        $eventData = $analytics->performQuery($gaDateLimit,
         'ga:totalEvents', [
             'dimensions' => 'ga:eventCategory,ga:eventLabel'
         ]);
@@ -106,22 +123,22 @@ class ApplicationController extends Controller
 
         $matricProperties = $gaMatricIndexArray[$gaMatricIndex];
 
-        $gaAllDevices = Analytics::performQuery($gaDateLimit,'ga:sessions',[
+        $gaAllDevices = $analytics->performQuery($gaDateLimit,'ga:sessions',[
             'dimensions' => 'ga:deviceCategory'
         ]);
         
         // Total Distribution of Traffic sources
-        $gaAllTrafficOrganic = Analytics::performQuery($gaDateLimit,'ga:sessions',[
+        $gaAllTrafficOrganic = $analytics->performQuery($gaDateLimit,'ga:sessions',[
             'dimensions' => 'ga:source',
             'segment' => 'gaid::-5'
         ]);
         
-        $gaAllTrafficDirect = Analytics::performQuery($gaDateLimit,'ga:sessions',[
+        $gaAllTrafficDirect = $analytics->performQuery($gaDateLimit,'ga:sessions',[
             'dimensions' => 'ga:source',
             'segment' => 'gaid::-7'
         ]);
         
-        $gaAllTrafficReferal = Analytics::performQuery($gaDateLimit,'ga:sessions',[
+        $gaAllTrafficReferal = $analytics->performQuery($gaDateLimit,'ga:sessions',[
             'dimensions' => 'ga:source',
             'segment' => 'gaid::-8'
         ]);
@@ -229,6 +246,23 @@ class ApplicationController extends Controller
             'returning-vists' => $percentageReturningVisits,
             'returning-vists-count' => $countReturningVisits
         ];
+    }
+
+    public function selectProject(Request $request)
+    {
+        if($request->ajax()) {
+
+            DB::table('project_management')
+                ->where('user_id', auth()->user()->id)
+                ->update(['enable' => false]);
+
+            DB::table('project_management')
+                ->where('user_id', auth()->user()->id)
+                ->where('project_id', $request->project)
+                ->update(['enable' => true]);
+
+            return response()->json([], 200);
+        }
     }
 
 }
