@@ -135,12 +135,13 @@ class ApplicationController extends Controller
             $gaAllTrafficDirect->totalsForAllResults, 
             $gaAllTrafficReferal->totalsForAllResults
         );
-        // dd($eventData);
-        $settings = Setting::first();
-        $settingArray = $settings->toArray();
-
+        
+        $settings = Setting::where('user_id', auth()->user()->id)->first();
+        $settingConfig = json_decode($settings->config);
+        
+        // dd($settingConfig);
         if($request->ajax()){
-            $eventTabView = view('dashboard.home.event-tabs-data', compact('eventData', 'settings'))->render();
+            $eventTabView = view('dashboard.home.event-tabs-data', compact('eventData', 'settingConfig'))->render();
             return response()->json([
                 'overviewCounts' => $overviewCounts,
                 'overviewData' => $overviewData,
@@ -150,7 +151,7 @@ class ApplicationController extends Controller
                 'trafficData' => $trafficData,
                 'eventTabView' => $eventTabView,
                 'settings' => $settings,
-                'settingArray' => $settingArray
+                'settingConfig' => $settingConfig
             ]);
         }
 
@@ -165,7 +166,7 @@ class ApplicationController extends Controller
             'gaMatricIndexArray',
             'eventData',
             'settings',
-            'settingArray'
+            'settingConfig'
         ));
         
     }

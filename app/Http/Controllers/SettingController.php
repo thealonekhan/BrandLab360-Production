@@ -31,9 +31,9 @@ class SettingController extends Controller
         'ga:totalEvents', [
             'dimensions' => 'ga:eventCategory,ga:eventLabel'
         ]);
-        $eventsTabs = $this->setEventRows($eventData);
-        $settings = Setting::first();
-        return view('dashboard.settings.index', compact('settings', 'eventsTabs'));
+        $eventTabs = $this->setEventRows($eventData);
+        $settings = Setting::where('user_id', auth()->user()->id)->first();
+        return view('dashboard.settings.index', compact('settings', 'eventTabs'));
     }
 
     /**
@@ -46,15 +46,46 @@ class SettingController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
+        $config = [
+            "filters" => [
+                "active" => !empty($request->filters) ? $request->filters : "off",
+                "matrix" => !empty($request->matrix) ? $request->matrix : "off",
+                "quickDate" => !empty($request->quickDate) ? $request->quickDate : "off",
+                "datepicker" => !empty($request->datepicker) ? $request->datepicker : "off",
+            ],
+            "topCards" => [
+                "active" => !empty($request->topCards) ? $request->topCards : "off",
+                "sessions" => !empty($request->sessions) ? $request->sessions : "off",
+                "users" => !empty($request->users) ? $request->users : "off",
+                "visits" => !empty($request->visits) ? $request->visits : "off",
+                "bounceRate" => !empty($request->bounceRate) ? $request->bounceRate : "off",
+                "avgSessionTime" => !empty($request->avgSessionTime) ? $request->avgSessionTime : "off",
+            ],
+            "overview" => [
+                "active" => !empty($request->overview) ? $request->overview : "off",
+                "graph" => !empty($request->graph) ? $request->graph : "off",
+                "cards" => [
+                    "active" => !empty($request->overviewCards) ? $request->overviewCards : "off",
+                    "newUsers" => !empty($request->overviewCardNewUsers) ? $request->overviewCardNewUsers : "off",
+                    "sessions" => !empty($request->overviewCardSessions) ? $request->overviewCardSessions : "off",
+                    "avgSessionDuration" => !empty($request->overviewCardAvgSessionDuration) ? $request->overviewCardAvgSessionDuration : "off",
+                    "bounceRate" => !empty($request->overviewCardBounceRate) ? $request->overviewCardBounceRate : "off",
+                ],
+                "pieGraph" => !empty($request->pieGraph) ? $request->pieGraph : "off",
 
+            ],
+            "graphs" => [
+                "devices" => !empty($request->devices) ? $request->devices : "off",
+                "traffic" => !empty($request->traffic) ? $request->traffic : "off",
+            ],
+            "events" => [
+                "active" => !empty($request->events) ? $request->events : "off",
+                "eventTabs" => $request->eventTabs
+            ]
+        ];
+        
         $settings = Setting::find($id);
-        $settings->showFilters = !empty($request->showFilters) ? 1 : 0;
-        $settings->showTopCards = !empty($request->showTopCards) ? 1 : 0;
-        $settings->showOverview = !empty($request->showOverview) ? 1 : 0;
-        $settings->showEvents = !empty($request->showEvents) ? 1 : 0;
-        $settings->showTrafficChart = !empty($request->showTrafficChart) ? 1 : 0;
-        $settings->showDeviceChart = !empty($request->showDeviceChart) ? 1 : 0;
-        $settings->eventTabs = json_encode($request->eventTabs);
+        $settings->config = json_encode($config);
         $settings->save();
 
         $request->session()->flash('message', 'Successfully updated settings');

@@ -1,4 +1,5 @@
-<div class="row">
+<div class="row mb-2">
+    @if($filters->matrix == "on")
 	<div class="col-sm-4 d-md-block">
 		<select class="form-control" id="gamatric">
 			<option value="5">User</option>
@@ -8,11 +9,16 @@
 			<option value="4">Avg. Session Duration</option>
 		</select>
 	</div>
+    @endif
 	<div class="col-sm-8 d-md-block">
+        @csrf
+        @if($filters->datepicker == "on")
 		<div class="btn-group btn-group-toggle float-right mb-3" data-toggle="buttons">
 			<input type="text" name="daterange" class="form-control" />
 		</div>
-		@csrf
+        @endif
+        @if($filters->quickDate == "on")
+		
         <!-- <button class="btn btn-primary float-right" type="button">
         <svg class="c-icon">
         <use xlink:href="{{url('/assets/icons/coreui/free-symbol-defs.svg#cui-cloud-download')}}"></use>
@@ -29,5 +35,6 @@
                 <input id="option3" type="radio" name="options" autocomplete="off" value="ga:year"> Year
             </label>
         </div>
+        @endif
 	</div>
 </div>

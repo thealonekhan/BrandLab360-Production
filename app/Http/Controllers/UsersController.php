@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Project;
+use App\Models\Setting;
 use App\Models\ProjectManagement;
 
 class UsersController extends Controller
@@ -88,6 +89,8 @@ class UsersController extends Controller
         $projectManagement->created_by = $you->id;
         $projectManagement->save();
 
+        $this->createSettings($user->id);
+
         $request->session()->flash('message', 'Successfully created user');
         return redirect()->route('users.index');
     }
@@ -164,5 +167,50 @@ class UsersController extends Controller
             $user->delete();
         }
         return redirect()->route('users.index');
+    }
+
+    public function createSettings($user_id)
+    {
+        $config = [
+            'filters' => [
+                'active' => 'on',
+                'matrix' => 'on',
+                'quickDate' => 'on',
+                'datepicker' => 'on'
+            ],
+            'topCards' => [
+                'active' => 'on',
+                'sessions' => 'on',
+                'users' => 'on',
+                'visits' => 'on',
+                'bounceRate' => 'on',
+                'avgSessionTime' => 'on'
+
+            ],
+            'overview' => [
+                'active' => 'on',
+                'graph' => 'on',
+                'cards' => [
+                    'active' => 'on',
+                    'newUsers' => 'on',
+                    'sessions' => 'on',
+                    'avgSessionDuration' => 'on',
+                    'bounceRate' => 'on'
+                ],
+                'pieGraph' => 'on'
+            ],
+            'graphs' => [
+                'devices' => 'on',
+                'traffic' => 'on'
+            ],
+            'events' => [
+                'active' => 'on',
+                'eventTabs' => ['Location', 'Product', 'Video']
+            ]
+        ];
+        $setting = new Setting();
+        $setting->config = json_encode($config);
+        $setting->user_id = $user_id;
+        $setting->save();
     }
 }

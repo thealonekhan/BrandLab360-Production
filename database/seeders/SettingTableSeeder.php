@@ -15,15 +15,44 @@ class SettingTableSeeder extends Seeder
     public function run()
     {
         Setting::create([
-            'showFilters' => true,
-            'showTopCards' => true,
-            'showOverview' => true,
-            'showEvents' => true,
-            'showTrafficChart' => true,
-            'showDeviceChart' => true,
-            'eventTabs' => json_encode([
-                'Location', 'Product', 'Video'
-            ])
+            'config' => json_encode([
+                'filters' => [
+                    'active' => 'on',
+                    'matrix' => 'on',
+                    'quickDate' => 'on',
+                    'datepicker' => 'on'
+                ],
+                'topCards' => [
+                    'active' => 'on',
+                    'sessions' => 'on',
+                    'users' => 'on',
+                    'visits' => 'on',
+                    'bounceRate' => 'on',
+                    'avgSessionTime' => 'on'
+
+                ],
+                'overview' => [
+                    'active' => 'on',
+                    'graph' => 'on',
+                    'cards' => [
+                        'active' => 'on',
+                        'newUsers' => 'on',
+                        'sessions' => 'on',
+                        'avgSessionDuration' => 'on',
+                        'bounceRate' => 'on'
+                    ],
+                    'pieGraph' => 'on'
+                ],
+                'graphs' => [
+                    'devices' => 'on',
+                    'traffic' => 'on'
+                ],
+                'events' => [
+                    'active' => 'on',
+                    'eventTabs' => ['Location', 'Product', 'Video']
+                ]
+            ]),
+            'user_id' => 1
         ]);
     }
 }

@@ -1,5 +1,21 @@
+<?php 
+
+define( 'SEARCH_STRING', 'on' );
+
+$cardsArray = (array)$topCards;
+unset($cardsArray["active"]);
+// $cardsArray = unset($cardsArray['active']);
+$count = count(array_filter($cardsArray,function($value){return SEARCH_STRING === $value;}));
+if ($count != 5) {
+	$columnVal = round(12/$count);
+} else {
+	$columnVal = 2;
+}
+
+?>
 <div class="row">
-	<div class="col-sm-6 col-md-2">
+	@if($topCards->sessions == "on")
+	<div class="col-sm-6 col-md-{{$columnVal}}">
 		<div class="card">
 			<div class="card-body">
 				<div class="text-muted text-right mb-4">
@@ -15,7 +31,9 @@
 		</div>
 	</div>
 	<!-- /.col-->
-	<div class="col-sm-6 col-md-2">
+	@endif
+	@if($topCards->users == "on")
+	<div class="col-sm-6 col-md-{{$columnVal}}">
 		<div class="card">
 			<div class="card-body">
 				<div class="text-muted text-right mb-4">
@@ -30,7 +48,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6 col-md-2">
+	@endif
+	@if($topCards->visits == "on")
+	<div class="col-sm-6 col-md-{{$columnVal}}">
 		<div class="card">
 			<div class="card-body">
 				<div class="text-muted text-right mb-4">
@@ -45,6 +65,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 	<!-- /.col-->
 	<!-- <div class="col-sm-6 col-md-2">
 		<div class="card">
@@ -62,8 +83,8 @@
 		</div>
 	</div> -->
 	<!-- /.col-->
-	
-	<div class="col-sm-6 col-md-2">
+	@if($topCards->bounceRate == "on")
+	<div class="col-sm-6 col-md-{{$columnVal}}">
 		<div class="card">
 			<div class="card-body">
 				<div class="text-muted text-right mb-4">
@@ -79,7 +100,9 @@
 		</div>
 	</div>
 	<!-- /.col-->
-	<div class="col-sm-6 col-md-4">
+	@endif
+	@if($topCards->avgSessionTime == "on")
+	<div class="col-sm-6 col-md-{{$columnVal != 2 ? $columnVal : 4}}">
 		<div class="card">
 			<div class="card-body">
 				<div class="text-muted text-right mb-4">
@@ -94,6 +117,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 	<!-- /.col-->
 	<!-- <div class="col-sm-6 col-md-2">
 		<div class="card">

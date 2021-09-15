@@ -15,13 +15,8 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->boolean('showFilters')->nullable();
-            $table->boolean('showTopCards')->nullable();
-            $table->boolean('showOverview')->nullable();
-            $table->boolean('showEvents')->nullable();
-            $table->boolean('showTrafficChart')->nullable();
-            $table->boolean('showDeviceChart')->nullable();
-            $table->json('eventTabs')->nullable();
+            $table->json('config')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

@@ -7,30 +7,30 @@
 <div class="container-fluid">
 	<div class="fade-in">
 		
-		
-		@if($settings->showFilters)
-			@include('dashboard.home.filter')
+		<!--  && !auth()->user()->hasRole('admin') -->
+		@if($settingConfig->filters->active == "on")
+			@include('dashboard.home.filter', ['filters' => $settingConfig->filters])
 		@endif
 
-		@if($settings->showTopCards)
-			@include('dashboard.home.top-counts')
+		@if($settingConfig->topCards->active == "on")
+			@include('dashboard.home.top-counts', ['topCards' => $settingConfig->topCards])
 		@endif
 
-		@if($settings->showOverview)
-			@include('dashboard.home.overview', ['overviewCounts' => $overviewCounts])
+		@if($settingConfig->overview->active == "on")
+			@include('dashboard.home.overview', ['overviewCounts' => $overviewCounts, 'overviewSettings' => $settingConfig->overview])
 		@endif
 
-		@if($settings->showEvents)
+		@if($settingConfig->events->active == "on")
     	<div class="row">
     		<div class="col-md-12 mb-4" id="event-tab-data">
-    		@include('dashboard.home.event-tabs-data', ['eventData' => $eventData, 'settings' => $settings])
+    		@include('dashboard.home.event-tabs-data', ['eventData' => $eventData, 'settingConfig' => $settingConfig])
     		</div>
     	</div>
 		@endif
 		<!-- /.row -->
 
 		<div class="row">
-			@if($settings->showDeviceChart)
+			@if($settingConfig->graphs->devices == "on")
 			<div class="col-sm-12 col-md-6">
 				<div class="card">
 					<div class="card-header">Devices
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			@endif
-			@if($settings->showTrafficChart)
+			@if($settingConfig->graphs->traffic == "on")
 			<div class="col-sm-12 col-md-6">
 				<div class="card">
 					<div class="card-header">Traffic
@@ -115,7 +115,7 @@ let visitorsDataRaw = [
 let matricProps = [
     "{{$matricProperties['name']}}", 
     "{{$matricProperties['symbol']}}"];
-let settings = {!! str_replace('&quot;', '', json_encode($settingArray)) !!};
+let settings = {!! str_replace('&quot;', '', json_encode((array)$settingConfig)) !!};
 
 	$('input[name="daterange"]').daterangepicker({
 	    timePicker: false,
@@ -190,7 +190,7 @@ let settings = {!! str_replace('&quot;', '', json_encode($settingArray)) !!};
 
                 var matricProps = [data.matricProperties['name'], data.matricProperties['symbol']];
 
-                buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, true, matricProps, data.settingArray);
+                buildCharts(overviewDataLabel, overviewData, visitorsDataRaw, devicesDataRaw, trafficDataRaw, true, matricProps, data.settingConfig);
                 
             }
         });

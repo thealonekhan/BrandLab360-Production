@@ -16,6 +16,7 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::any('/audience/overview', 'AudienceController@overview')->name('audience.overview.ajax');
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');
     Route::any('/behavior/event/overview', 'BehaviorController@overview')->name('behavior.overview.ajax');
+    Route::resource('settings', 'SettingController');
     // Route::any('/behavior/event/topevents', 'BehaviorController@topevents')->name('behavior.topevents.ajax');
     Route::group(['middleware' => ['role:user']], function () {
         
@@ -56,7 +57,6 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::post('/update', 'MenuController@update')->name('menu.menu.update');
             Route::get('/delete', 'MenuController@delete')->name('menu.menu.delete');
         });
-        Route::resource('settings', 'SettingController');
     });
     Route::middleware(['role:admin|manager'])->group(function () {
         Route::resource('users', 'UsersController');
