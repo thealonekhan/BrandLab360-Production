@@ -66,23 +66,7 @@ class ApplicationController extends Controller
             'ga:year' => 'Y'
         ];
 
-        if ($request->get('gamatric')) {
-            $gaMatricIndex = $request->get('gamatric');
-        }
-        
-        if ($request->get('option')) {
-            $gaOverviewDimentions = $request->get('option');
-        }
-
-        if ($request->get('daterange')) {
-            $dateRanges = $request->get('daterange');
-            $dateRangeFormated = explode(" - ", $dateRanges);
-            $startDate = Carbon::createFromFormat('Y-m-d', $dateRangeFormated[0]);
-            $endDate = Carbon::createFromFormat('Y-m-d', $dateRangeFormated[1]);
-            $gaDateLimit = Period::create($startDate, $endDate);
-
-        }
-
+        // Setting up GA with selected project
         $projectAnalytics = ProjectManagement::with('project')
         ->where('user_id', auth()->user()->id)
         ->where('enabled', true)
@@ -92,25 +76,69 @@ class ApplicationController extends Controller
         }
         $analytics = $this->helper->getView($projectAnalytics->project->analytics_view_id);
 
-        // Total Counts for sessions, pageviews, bounceRate, users, avgSessionDuration
-        $gaAudienceOverViews = $analytics->performQuery($gaDateLimit,
-        'ga:sessions,ga:bounceRate,ga:newUsers,ga:avgSessionDuration,ga:users,ga:newVisits,ga:pageViews', [
-            'dimensions' => $gaOverviewDimentions
-        ]);
-
-        // dd($gaAudienceOverViews);
-
-        $gaAudienceOverViewsPercentage = $analytics->performQuery($gaDateLimit,
-        'ga:percentNewVisits,ga:users', [
-            'dimensions' => 'ga:userType'
-        ]);
-
-        $eventData = $analytics->performQuery($gaDateLimit,
-        'ga:totalEvents', [
-            'dimensions' => 'ga:eventCategory,ga:eventLabel'
-        ]);
+        // Matrix Filter
+        if ($request->get('gamatric')) {
+            $gaMatricIndex = $request->get('gamatric');
+        }
         
-        // dd($eventData);
+        // Quick Date filter
+        if ($request->get('option')) {
+            $gaOverviewDimentions = $request->get('option');
+        }
+
+        // Daterange filter
+        if ($request->get('daterange')) {
+            $dateRanges = $request->get('daterange');
+            $dateRangeFormated = explode(" - ", $dateRanges);
+            $startDate = Carbon::createFromFormat('Y-m-d', $dateRangeFormated[0]);
+            $endDate = Carbon::createFromFormat('Y-m-d', $dateRangeFormated[1]);
+            $gaDateLimit = Period::create($startDate, $endDate);
+
+        }
+
+        try {
+            // Total Counts for sessions, pageviews, bounceRate, users, avgSessionDuration
+            $gaAudienceOverViews = $analytics->performQuery($gaDateLimit,
+            'ga:sessions,ga:bounceRate,ga:newUsers,ga:avgSessionDuration,ga:users,ga:newVisits,ga:pageViews', [
+                'dimensions' => $gaOverviewDimentions
+            ]);
+
+            // Pie Chart: GA New Visits and Returning Visitors
+            $gaAudienceOverViewsPercentage = $analytics->performQuery($gaDateLimit,
+            'ga:percentNewVisits,ga:users', [
+                'dimensions' => 'ga:userType'
+            ]);
+
+            // GA Event & Custom Events
+            $eventData = $analytics->performQuery($gaDateLimit,
+            'ga:totalEvents', [
+                'dimensions' => 'ga:eventCategory,ga:eventLabel'
+            ]);
+
+            // Ga Devices, Traffic
+            $gaAllDevices = $analytics->performQuery($gaDateLimit,'ga:sessions',[
+                'dimensions' => 'ga:deviceCategory'
+            ]);
+            
+            // Total Distribution of Traffic sources
+            $gaAllTrafficOrganic = $analytics->performQuery($gaDateLimit,'ga:sessions',[
+                'dimensions' => 'ga:source',
+                'segment' => 'gaid::-5'
+            ]);
+            
+            $gaAllTrafficDirect = $analytics->performQuery($gaDateLimit,'ga:sessions',[
+                'dimensions' => 'ga:source',
+                'segment' => 'gaid::-7'
+            ]);
+            
+            $gaAllTrafficReferal = $analytics->performQuery($gaDateLimit,'ga:sessions',[
+                'dimensions' => 'ga:source',
+                'segment' => 'gaid::-8'
+            ]);
+        } catch (\Throwable $th) {
+            return view('dashboard.homepage-nodata');
+        }
+
         $overviewCounts = $gaAudienceOverViews->totalsForAllResults;
 
         if (!empty($gaAudienceOverViews->rows)) {
@@ -122,26 +150,6 @@ class ApplicationController extends Controller
         }
 
         $matricProperties = $gaMatricIndexArray[$gaMatricIndex];
-
-        $gaAllDevices = $analytics->performQuery($gaDateLimit,'ga:sessions',[
-            'dimensions' => 'ga:deviceCategory'
-        ]);
-        
-        // Total Distribution of Traffic sources
-        $gaAllTrafficOrganic = $analytics->performQuery($gaDateLimit,'ga:sessions',[
-            'dimensions' => 'ga:source',
-            'segment' => 'gaid::-5'
-        ]);
-        
-        $gaAllTrafficDirect = $analytics->performQuery($gaDateLimit,'ga:sessions',[
-            'dimensions' => 'ga:source',
-            'segment' => 'gaid::-7'
-        ]);
-        
-        $gaAllTrafficReferal = $analytics->performQuery($gaDateLimit,'ga:sessions',[
-            'dimensions' => 'ga:source',
-            'segment' => 'gaid::-8'
-        ]);
 
         if (!empty($gaAllDevices->rows)) {
             $devicesData = $this->setDeviceRows($gaAllDevices->rows);
@@ -254,12 +262,12 @@ class ApplicationController extends Controller
 
             DB::table('project_management')
                 ->where('user_id', auth()->user()->id)
-                ->update(['enable' => false]);
+                ->update(['enabled' => false]);
 
             DB::table('project_management')
                 ->where('user_id', auth()->user()->id)
                 ->where('project_id', $request->project)
-                ->update(['enable' => true]);
+                ->update(['enabled' => true]);
 
             return response()->json([], 200);
         }

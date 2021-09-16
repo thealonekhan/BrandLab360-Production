@@ -7,6 +7,7 @@ use App\Models\Setting;
 use Analytics;
 use Spatie\Analytics\Period;
 use AnalyticsHelper;
+use App\Models\ProjectManagement;
 
 class SettingController extends Controller
 {
@@ -28,11 +29,25 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $analytics = $this->helper->getView('248962712');
-        $eventData = $analytics->performQuery(Period::days(365),
-        'ga:totalEvents', [
-            'dimensions' => 'ga:eventCategory,ga:eventLabel'
-        ]);
+        $projectAnalytics = ProjectManagement::with('project')
+        ->where('user_id', auth()->user()->id)
+        ->where('enabled', true)
+        ->first();
+
+        if (!$projectAnalytics) { // if There no project created
+            return view('dashboard.homepage-nodata');
+        }
+        $analytics = $this->helper->getView($projectAnalytics->project->analytics_view_id);
+
+        try { // check if GA analytics ID is valid
+            $eventData = $analytics->performQuery(Period::days(365),
+            'ga:totalEvents', [
+                'dimensions' => 'ga:eventCategory,ga:eventLabel'
+            ]);
+        } catch (\Throwable $th) {
+            return view('dashboard.homepage-nodata');
+        }
+
         $eventTabs = $this->setEventRows($eventData);
         $settings = Setting::where('user_id', auth()->user()->id)->first();
         return view('dashboard.settings.index', compact('settings', 'eventTabs'));

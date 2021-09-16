@@ -12,10 +12,13 @@
             }
         ?>
         @if(!empty(auth()->user()) )
-        @if(auth()->user()->hasRole('admin')) 
+        @if(auth()->user()->hasRole('admin'))
+        <?php 
+          $projects = \App\Models\ProjectManagement::with('project')->get();
+        ?>
           <select class="form-control mt-2" name="project-selection" style="width:30%" id="project-selection">
-            @foreach(\App\Models\Project::get()->pluck('title', 'id')->toArray() as $key => $project)
-                <option value="{{ $key }}">{{ $project }}</option>
+            @foreach($projects as $key => $project)
+                <option value="{{ $project->project->id }}" {{ $project->enabled ? "selected" : "" }}>{{ $project->project->title }}</option>
             @endforeach
           </select>
         @else
