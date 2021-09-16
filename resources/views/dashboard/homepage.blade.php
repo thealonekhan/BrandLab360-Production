@@ -28,8 +28,16 @@
 		<!-- /.row -->
 
 		<div class="row">
+            <?php
+                $graphCol = 1;
+                $graphArray = (array)$settingConfig->graphs;
+                $graphCount = count(array_filter($graphArray,function($value){return SEARCH_STRING === $value;}));
+                if ($graphCount > 0) {
+                    $graphCol = 12/$graphCount;
+                }
+            ?>
 			@if($settingConfig->graphs->devices == "on")
-			<div class="col-sm-12 col-md-6">
+			<div class="col-sm-12 col-md-{{$graphCol}}">
 				<div class="card">
 					<div class="card-header">Devices
 						<div class="card-header-actions"></div>
@@ -43,7 +51,7 @@
 			</div>
 			@endif
 			@if($settingConfig->graphs->traffic == "on")
-			<div class="col-sm-12 col-md-6">
+			<div class="col-sm-12 col-md-{{$graphCol}}">
 				<div class="card">
 					<div class="card-header">Traffic
 						<div class="card-header-actions"></div>
