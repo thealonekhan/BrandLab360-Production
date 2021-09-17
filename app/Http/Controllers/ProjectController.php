@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Status;
 use App\Models\ProjectManagement;
-
+use App\Rules\VerifyAnalytic;
+use AnalyticsHelper;
 class ProjectController extends Controller
 {
+    private $helper;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AnalyticsHelper $helper)
     {
         $this->middleware('auth');
+        $this->helper = $helper;
     }
 
     /**
@@ -60,7 +63,7 @@ class ProjectController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|min:1|max:255',
             'analytics_project_id' => 'required',
-            'analytics_view_id' => 'required',
+            'analytics_view_id' => ['required','numeric', new VerifyAnalytic($this->helper)],
             'status_id' => 'required',
         ]);
         $user = auth()->user();
@@ -121,7 +124,7 @@ class ProjectController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|min:1|max:255',
             'analytics_project_id' => 'required',
-            'analytics_view_id' => 'required',
+            'analytics_view_id' => ['required','numeric', new VerifyAnalytic($this->helper)],
             'status_id' => 'required',
         ]);
         $user = auth()->user();

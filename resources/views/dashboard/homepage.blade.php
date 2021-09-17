@@ -5,7 +5,6 @@
 <div class="container-fluid">
 	<div class="fade-in">
 		
-		<!--  && !auth()->user()->hasRole('admin') -->
 		@if($settingConfig->filters->active == "on")
 			@include('dashboard.home.filter', ['filters' => $settingConfig->filters])
 		@endif

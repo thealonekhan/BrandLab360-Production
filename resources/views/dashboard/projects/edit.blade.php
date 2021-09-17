@@ -19,13 +19,19 @@
                             </div>
 
                             <div class="form-group row">
-                                <label>Anlytics Project ID</label>
-                                <input class="form-control" type="text" placeholder="{{ __('Analytics Project Id') }}" name="analytics_project_id" value="{{ $project->analytics_project_id }}" required>
+                                <div class="col-md-12 pl-0 pr-0">
+                                    <label>Analytics Project ID</label>
+                                    <a data-toggle="popover-project" class="project-popover float-right" href="#"><i class="c-icon c-icon-lg cil-info"></i></a>
+                                    <input class="form-control" type="text" placeholder="{{ __('Analytics Project Id') }}" name="analytics_project_id" value="{{ $project->analytics_project_id }}" required>
+                                </div>
                             </div>
                             
                             <div class="form-group row">
-                                <label>Analytics View ID</label>
-                                <input class="form-control" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" value="{{ $project->analytics_view_id }}" required>
+                                <div class="col-md-12 pl-0 pr-0">
+                                    <label>Analytics View ID</label>
+                                    <a data-toggle="popover-project" class="project-popover float-right" href="#"><i class="c-icon c-icon-lg cil-info"></i></a>
+                                    <input class="form-control" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" value="{{ $project->analytics_view_id }}" required>
+                                </div>
                             </div>
 
                             <!-- <div class="form-group row">
@@ -55,6 +61,15 @@
             </div>
           </div>
         </div>
+<style>
+  .popover,.popover-body{
+    width: 40rem;
+    max-width: 40rem;
+  }
+  .cil-info{
+    color: #39f;
+  }
+</style>
 
 @endsection
 

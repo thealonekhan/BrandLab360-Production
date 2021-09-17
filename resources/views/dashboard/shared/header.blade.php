@@ -14,11 +14,15 @@
         @if(!empty(auth()->user()) )
         @if(auth()->user()->hasRole('admin'))
         <?php 
-          $projects = \App\Models\ProjectManagement::with('project')->get();
+          $projects = \App\Models\Project::get();
         ?>
           <select class="form-control mt-2" name="project-selection" style="width:30%" id="project-selection">
             @foreach($projects as $key => $project)
-                <option value="{{ $project->project->id }}" {{ $project->enabled ? "selected" : "" }}>{{ $project->project->title }}</option>
+                <?php 
+                  $selectedProject = \App\Models\ProjectManagement::where('project_id', $project->id)->where('user_id', auth()->user()->id)->first(); 
+                  $selected = $selectedProject->enabled ? "selected" : "";
+                ?>
+                <option value="{{ $project->id }}" {{ $selected }}>{{ $project->title }}</option>
             @endforeach
           </select>
         @else

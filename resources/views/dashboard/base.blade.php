@@ -75,6 +75,15 @@
 
         <main class="c-main">
           <div class="loading">Loading&#8230;</div>
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
           @yield('content') 
 
         </main>
@@ -88,7 +97,9 @@
     <!-- CoreUI and necessary plugins-->
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     <script src="{{ asset('js/coreui-utils.js') }}"></script>
+	<script src="{{ asset('js/popovers.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     @yield('javascript')
     
     <script type="text/javascript">
@@ -113,6 +124,12 @@
 					}
 				});
           	});
+			  $(function(){
+				$(".project-popover").on("click", function(e){
+					e.preventDefault();
+				});
+			});
+			
       	});
     </script>
 

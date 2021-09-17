@@ -11,6 +11,7 @@ use App\Models\ProjectManagement;
 
 class SettingController extends Controller
 {
+    private $helper;
     /**
      * Create a new controller instance.
      *
