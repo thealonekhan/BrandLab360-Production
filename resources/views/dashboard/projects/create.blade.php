@@ -29,7 +29,7 @@
                               <div class="col-md-12 pl-0 pr-0">
                                   <label>Analytics View ID</label>
                                   <a data-toggle="popover-project" class="project-popover float-right" href="#"><i class="c-icon c-icon-lg cil-info"></i></a>
-                                  <input class="form-control border-success" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" id="analytics_view_id" required>
+                                  <input class="form-control border-success" data-inputmask="" type="text" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" id="analytics_view_id" required>
                               </div>
                             </div>
 
