@@ -22,7 +22,7 @@
                                 <div class="col-md-12 pl-0 pr-0">
                                     <label>Analytics Project ID</label>
                                     <a data-toggle="popover-project" class="project-popover float-right" href="#"><i class="c-icon c-icon-lg cil-info"></i></a>
-                                    <input class="form-control" type="text" data-inputmask="" placeholder="{{ __('Analytics Project Id') }}" name="analytics_project_id" id="analytics_project_id" value="{{ $project->analytics_project_id }}" required>
+                                    <input class="form-control border-danger" type="text" data-inputmask="" placeholder="{{ __('Analytics Project Id') }}" name="analytics_project_id" id="analytics_project_id" value="{{ $project->analytics_project_id }}" required>
                                 </div>
                             </div>
                             
@@ -30,7 +30,7 @@
                                 <div class="col-md-12 pl-0 pr-0">
                                     <label>Analytics View ID</label>
                                     <a data-toggle="popover-project" class="project-popover float-right" href="#"><i class="c-icon c-icon-lg cil-info"></i></a>
-                                    <input class="form-control" type="text" data-inputmask="" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" id="analytics_view_id" value="{{ $project->analytics_view_id }}" required>
+                                    <input class="form-control border-success" type="text" data-inputmask="" placeholder="{{ __('Analytics View Id') }}" name="analytics_view_id" id="analytics_view_id" value="{{ $project->analytics_view_id }}" required>
                                 </div>
                             </div>
 
