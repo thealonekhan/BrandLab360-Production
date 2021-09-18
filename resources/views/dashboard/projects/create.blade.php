@@ -62,6 +62,7 @@
     width: 40rem;
     max-width: 40rem;
   }
+
   .cil-info{
     color: #39f;
   }
