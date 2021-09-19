@@ -157,8 +157,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-primary" type="submit">Save</button>
-                    <a class="btn btn-primary" href="{{ route('menu.index', ['menu' => $menuElement->menu_id]) }}">Return</a>
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <a class="btn btn-danger ml-1" href="{{ route('menu.index', ['menu' => $menuElement->menu_id]) }}">Return</a>
                 </form>
             </div>
           </div>

@@ -63,8 +63,8 @@
                                 @endif
                                 </select>
                             </div>
-                            <button class="btn btn-block btn-success" type="submit">{{ __('Save') }}</button>
-                            <a href="{{ route('users.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a> 
+                            <button class="btn btn-success" type="submit">{{ __('Save') }}</button>
+                            <a href="{{ route('users.index') }}" class="btn btn-danger ml-1">{{ __('Return') }}</a> 
                         </form>
                     </div>
                 </div>
