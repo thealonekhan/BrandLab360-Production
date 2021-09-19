@@ -148,25 +148,25 @@
                                                 </li>
                                                     <ul class="list-group filters-child">
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-3 ml-5"><strong>New Users:</strong></label>
+                                                            <label class="mr-3 ml-5"><p class="mb-0">New Users:</p></label>
                                                             <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
                                                                 <input name="overviewCardNewUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->newUsers == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                             </label>
                                                         </li>
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-3 ml-5"><strong>Sessions:</strong></label>
+                                                            <label class="mr-3 ml-5"><p class="mb-0">Sessions:</p></label>
                                                             <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
                                                                 <input name="overviewCardSessions" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessions == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                             </label>
                                                         </li>
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-3 ml-5"><strong>Avg. Session Duration:</strong></label>
+                                                            <label class="mr-3 ml-5"><p class="mb-0">Avg. Session Duration:</p></label>
                                                             <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
                                                                 <input name="overviewCardAvgSessionDuration" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->avgSessionDuration == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                             </label>
                                                         </li>
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-3 ml-5"><strong>Bounce Rate:</strong></label>
+                                                            <label class="mr-3 ml-5"><p class="mb-0">Bounce Rate:</p></label>
                                                             <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
                                                                 <input name="overviewCardBounceRate" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->bounceRate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                             </label>

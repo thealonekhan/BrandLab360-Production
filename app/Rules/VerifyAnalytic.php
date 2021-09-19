@@ -52,6 +52,6 @@ class VerifyAnalytic implements Rule
      */
     public function message()
     {
-        return 'Provided Analytics Configurations are not valid';
+        return 'The Analytics <strong>Project ID</strong> or <strong>View ID</strong> you provided seems to be INVALID, Please click <i class="c-icon c-icon-lg cil-info"></i> to see screenshot of how to capture the right IDs';
     }
 }
