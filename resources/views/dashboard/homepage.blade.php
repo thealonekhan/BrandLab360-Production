@@ -4,6 +4,9 @@
 
 <div class="container-fluid">
 	<div class="fade-in">
+        <?php 
+            define( 'SEARCH_STRING', 'on' );
+        ?>
 		
 		@if($settingConfig->filters->active == "on")
 			@include('dashboard.home.filter', ['filters' => $settingConfig->filters])

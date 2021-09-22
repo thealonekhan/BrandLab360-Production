@@ -1,7 +1,5 @@
 <?php 
 
-define( 'SEARCH_STRING', 'on' );
-
 $cardsArray = (array)$topCards;
 unset($cardsArray["active"]);
 // $cardsArray = unset($cardsArray['active']);
