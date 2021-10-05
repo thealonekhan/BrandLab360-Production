@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 */
 
 Route::post('/contact', function (Request $request) {
+    Log::info($request->all());
     return $request->all();
 });
