@@ -11,8 +11,10 @@
                       <i class="fa fa-align-justify"></i> {{ __('Create') }}</div>
                     <div class="card-body">
                         <br>
-                        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data" autocomplete="off">
                             @csrf
+                            <input type="text" name="fakeemailremembered" style="display:none" id="email" />
+                            <input type="password" name="fakepasswordremembered" style="display:none" id="password" />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
