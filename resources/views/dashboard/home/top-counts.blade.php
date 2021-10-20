@@ -65,7 +65,7 @@ if ($count != 5) {
 	</div>
 	@endif
 	<!-- /.col-->
-	@if($topCards->bounceRate == "on")
+	@if($topCards->sessionsPerUser == "on")
 	<div class="col-sm-6 col-md-{{$columnVal}}">
 		<div class="card">
 			<div class="card-body">
