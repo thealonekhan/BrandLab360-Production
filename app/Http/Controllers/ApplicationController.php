@@ -243,9 +243,9 @@ class ApplicationController extends Controller
         foreach ($data as $key => $value) { 
             $gaDate = Carbon::createFromFormat($dateFormat, $value[0])->format($dateFormatAssign);
             if (\Arr::exists($graphResults, $gaDate)) {
-                $graphResults[$gaDate] = $graphResults[$gaDate] + ($matricIndex == 4 || $matricIndex == 8  ? (float)$value[$matricIndex]: (int)$value[$matricIndex]);
+                $graphResults[$gaDate] = $graphResults[$gaDate] + ($matricIndex == 4 || $matricIndex == 8  ? round((float)$value[$matricIndex], 2): (int)$value[$matricIndex]);
             } else {
-                $graphResults[$gaDate] = $matricIndex == 4 || $matricIndex == 8 ? (float)$value[$matricIndex] : (int)$value[$matricIndex];
+                $graphResults[$gaDate] = $matricIndex == 4 || $matricIndex == 8 ? round((float)$value[$matricIndex], 2) : (int)$value[$matricIndex];
             }
         }
         return $graphResults;
