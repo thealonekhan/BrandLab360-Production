@@ -29,7 +29,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input class="form-control" type="text" placeholder="{{ __('E-Mail Address') }}" name="email" required autocomplete="off">
+                                <input class="form-control" type="text" placeholder="{{ __('E-Mail Address') }}" name="email" required autocomplete="nope">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -39,7 +39,7 @@
                                       </svg>
                                     </span>
                                 </div>
-                                <input class="form-control" type="password" placeholder="{{ __('Password') }}" name="password" required autofocus autocomplete="off">
+                                <input class="form-control" type="password" placeholder="{{ __('Password') }}" name="password" required autofocus autocomplete="new-password">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
