@@ -67,7 +67,7 @@
                   <use xlink:href="{{ url('/icons/sprites/free.svg#cil-comment-square') }}"></use>
                 </svg> Comments<span class="badge badge-warning ml-auto">42</span></a>
               <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div> -->
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="{{url('/users-profile/'.auth()->user()->id)}}">
                 <svg class="c-icon mr-2">
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-user') }}"></use> -->
                 </svg> Profile</a>
@@ -86,10 +86,10 @@
                 </svg> Projects<span class="badge badge-primary ml-auto">{{\App\Models\Project::count()}}</span></a>
                 @endif
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <svg class="c-icon mr-2">
+              <!-- <a class="dropdown-item" href="#"> -->
+                <!-- <svg class="c-icon mr-2"> -->
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-lock-locked') }}"></use> -->
-                </svg> Lock Account</a>
+                <!-- </svg> Lock Account</a> -->
                 <a class="dropdown-item" href="#">
                 <svg class="c-icon mr-2">
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-account-logout') }}"></use> -->

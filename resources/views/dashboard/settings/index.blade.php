@@ -20,8 +20,8 @@
                 <div class="card">
                     <div class="card-header">
                         Dashboard Settings
-                        <button class="btn btn-sm btn-danger float-right ml-2" type="reset"> Reset</button>
-                        <button class="btn btn-sm btn-success float-right" type="submit"> Save</button>
+                        <button class="btn btn-sm btn-danger float-right ml-2 pb-0" type="reset"> Reset</button>
+                        <button class="btn btn-sm btn-success float-right pb-0" type="submit"> Save</button>
                     </div>
                 </div>
                 <!-- Tabs -->
@@ -277,8 +277,8 @@
                 <!-- <button class="btn btn-success btn-lg mt-2" type="submit">{{ __('Save') }}</button> -->
                 <div class="card mt-2">
                     <div class="card-header">
-                        <button class="btn btn-sm btn-danger float-right ml-2" type="reset"> Reset</button>
-                        <button class="btn btn-sm btn-success float-right" type="submit"> {{ __('Save') }}</button>
+                        <button class="btn btn-sm btn-danger float-right ml-2 pb-0" type="reset"> Reset</button>
+                        <button class="btn btn-sm btn-success float-right pb-0" type="submit"> {{ __('Save') }}</button>
                     </div>
                 </div>
                 </form>

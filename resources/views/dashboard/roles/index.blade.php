@@ -11,7 +11,7 @@
           <div class="card-header"><h4>Menu roles</h4></div>
             <div class="card-body">
                 <div class="row">
-                    <a class="btn btn-lg btn-primary" href="{{ route('roles.create') }}">Add new role</a>
+                    <a class="btn btn-lg btn-primary custom-btn-color ml-3" href="{{ route('roles.create') }}">Add new role</a>
                 </div>
                 <br>
                 <table class="table table-striped table-bordered datatable">
@@ -44,27 +44,28 @@
                                     {{ $role->updated_at }}
                                 </td>
                                 <td>
-                                    <a class="btn btn-success" href="{{ route('roles.up', ['id' => $role->id]) }}">
+                                    <a class="btn btn-success custom-btn-color" href="{{ route('roles.up', ['id' => $role->id]) }}">
                                         <i class="cil-arrow-thick-top"></i> 
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-success" href="{{ route('roles.down', ['id' => $role->id]) }}">
+                                    <a class="btn btn-success custom-btn-color" href="{{ route('roles.down', ['id' => $role->id]) }}">
                                         <i class="cil-arrow-thick-bottom"></i>  
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('roles.show', $role->id ) }}" class="btn btn-primary">Show</a>
+                                    <a href="{{ route('roles.show', $role->id ) }}" class="btn btn-primary custom-btn-color">Show</a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('roles.edit', $role->id ) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('roles.edit', $role->id ) }}" class="btn btn-primary custom-btn-color">Edit</a>
                                 </td>
                                 <td>
-                                <form action="{{ route('roles.destroy', $role->id ) }}" method="POST">
+                                <a id="modal-delete-btn" data-attr="{{ route('roles.delete', $role->id ) }}" class="btn btn-block btn-danger pb-0">Delete</a>
+                                <!-- <form action="{{ route('roles.destroy', $role->id ) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
+                                    <button class="btn btn-danger pb-0">Delete</button>
+                                </form> -->
                                 </td>
                             </tr>
                         @endforeach

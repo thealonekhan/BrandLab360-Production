@@ -8,6 +8,7 @@ use App\Models\Status;
 use App\Models\ProjectManagement;
 use App\Rules\VerifyAnalytic;
 use AnalyticsHelper;
+use Illuminate\Support\Facades\Session;
 class ProjectController extends Controller
 {
     private $helper;
@@ -83,7 +84,7 @@ class ProjectController extends Controller
         $projectManagement->enabled = false;
         $projectManagement->save();
 
-        $request->session()->flash('message', 'Successfully created project');
+        Session::flash('message', 'Successfully created the project');
         return redirect()->route('projects.index');
     }
 
@@ -153,6 +154,20 @@ class ProjectController extends Controller
             ProjectManagement::find($project->id)->delete();
             $project->delete();
         }
+        Session::flash('message', 'Successfully deleted the project');
         return redirect()->route('projects.index');
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $project = Project::find($id);
+
+        return view('dashboard.projects.project-modal', compact('project'))->render();
     }
 }

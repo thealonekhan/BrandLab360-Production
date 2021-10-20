@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 use App\Models\Menurole;
 use App\Models\RoleHierarchy;
+use Illuminate\Support\Facades\Session;
 
 class RolesController extends Controller
 {
@@ -90,7 +91,7 @@ class RolesController extends Controller
         $roleHierarchy->hierarchy = $hierarchy;
         $roleHierarchy->save();
         $request->session()->flash('message', 'Successfully created role');
-        return redirect()->route('roles.create');
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -132,7 +133,7 @@ class RolesController extends Controller
         $role->name = $request->input('name');
         $role->save();
         $request->session()->flash('message', 'Successfully updated role');
-        return redirect()->route('roles.edit', $id); 
+        return redirect()->route('roles.index', $id); 
     }
 
     /**
@@ -147,15 +148,25 @@ class RolesController extends Controller
         $roleHierarchy = RoleHierarchy::where('role_id', '=', $id)->first();
         $menuRole = Menurole::where('role_name', '=', $role->name)->first();
         if(!empty($menuRole)){
-            $request->session()->flash('message', "Can't delete. Role has assigned one or more menu elements.");
-            $request->session()->flash('back', 'roles.index');
-            return view('dashboard.shared.universal-info');
+            $request->session()->flash('error', "Can't delete. Role has assigned one or more menu elements.");
+            return redirect()->route('roles.index');
         }else{
             $role->delete();
             $roleHierarchy->delete();
             $request->session()->flash('message', "Successfully deleted role");
-            $request->session()->flash('back', 'roles.index');
-            return view('dashboard.shared.universal-info');
+            return redirect()->route('roles.index');
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $role = Role::find($id);
+        return view('dashboard.roles.role-modal', compact('role'))->render();
     }
 }

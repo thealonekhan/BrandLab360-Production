@@ -7,10 +7,22 @@
         <div class="col-md-6">
           <div class="card-group">
             <div class="card p-4">
+              <div class="card-header p-0" style="border: 0">
+              <img src="{{ url('assets/img/BrandLab360_Primary-Logo_Black.png') }}" width="200" class="img-fluid float-right" alt="Responsive image">
+              </div>
               <div class="card-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0" style="list-style: none;">
+                            @foreach ($errors->all() as $error)
+                                <li>{!! $error !!}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login.perform') }}">
                     @csrf
                     <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -34,11 +46,14 @@
                     </div>
                     <div class="row">
                     <div class="col-6">
-                        <button class="btn btn-primary px-4" type="submit">{{ __('Login') }}</button>
+                        <button class="btn btn-primary px-4 custom-btn-color" type="submit">{{ __('Login') }}</button>
                     </div>
                     </form>
                     <div class="col-6 text-right">
-                        <a href="{{ route('password.request') }}" class="btn btn-link px-0">{{ __('Forgot Your Password?') }}</a>
+                      <div class="form-check checkbox">
+                        <input class="form-check-input" id="remember" type="checkbox" name="remember" value="1">
+                        <label class="form-check-label" style="vertical-align: sub;" for="remember">Remember me</label>
+                      </div>
                     </div>
                     </div>
               </div>

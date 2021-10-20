@@ -11,7 +11,7 @@
                       <i class="fa fa-align-justify"></i>{{ __('Projects') }}</div>
                     <div class="card-body">
                         <div class="row"> 
-                          <a href="{{ route('projects.create') }}" class="btn btn-primary m-2">{{ __('Add Project') }}</a>
+                          <a href="{{ route('projects.create') }}" class="btn btn-primary m-2 custom-btn-color ml-3">{{ __('Add Project') }}</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">
@@ -38,17 +38,18 @@
                                   </span>
                               </td>
                               <td>
-                                <a href="{{ url('/projects/' . $project->id) }}" class="btn btn-block btn-primary">View</a>
+                                <a href="{{ url('/projects/' . $project->id) }}" class="btn btn-block btn-primary custom-btn-color">View</a>
                               </td>
                               <td>
-                                <a href="{{ url('/projects/' . $project->id . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
+                                <a href="{{ url('/projects/' . $project->id . '/edit') }}" class="btn btn-block btn-primary custom-btn-color">Edit</a>
                               </td>
                               <td>
-                                <form action="{{ route('projects.destroy', $project->id ) }}" method="POST">
+                                <a id="modal-delete-btn" data-attr="{{ route('projects.delete', $project->id ) }}" class="btn btn-block btn-danger pb-0">Delete</a>
+                                <!-- <form action="{{ route('projects.destroy', $project->id ) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-block btn-danger">Delete</button>
-                                </form>
+                                    <button class="btn btn-block btn-danger pb-0" data-toggle="modal" data-target="#dangerModal">Delete</button>
+                                </form> -->
                               </td>
                             </tr>
                           @endforeach

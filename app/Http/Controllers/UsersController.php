@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Project;
 use App\Models\Setting;
 use App\Models\ProjectManagement;
+use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
@@ -167,7 +168,19 @@ class UsersController extends Controller
             }
             $user->delete();
         }
+        Session::flash('message', 'Successfully deleted the user');
         return redirect()->route('users.index');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $user = User::find($id);
+        return view('dashboard.admin.user-modal', compact('user'))->render();
     }
 
     public function createSettings($user_id)
@@ -213,5 +226,72 @@ class UsersController extends Controller
         $setting->config = json_encode($config);
         $setting->user_id = $user_id;
         $setting->save();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profile($id)
+    {
+        $user = User::find($id);
+        return view('dashboard.admin.userProfileForm', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_profile(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name'       => 'required|min:1|max:256',
+            // 'email'      => 'required|email|max:256'
+        ]);
+        $user = User::find($id);
+        $user->name       = $request->input('name');
+        if ($request->input('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+        $user->save();
+        $request->session()->flash('message', 'Successfully updated user profile');
+        return redirect()->route('dashboard.overview.ajax');
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function change_password($id)
+    {
+        $user = User::find($id);
+        return view('dashboard.admin.userPasswordForm', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_password(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required|min:6',
+            // 'email'      => 'required|email|max:256'
+        ]);
+        $user = User::find($id);
+        $user->password = Hash::make($request->input('password'));
+        $user->password_change_at = \Carbon\Carbon::now();
+        $user->save();
+        $request->session()->flash('message', 'Successfully updated user password');
+        return redirect()->route('dashboard.overview.ajax');
     }
 }

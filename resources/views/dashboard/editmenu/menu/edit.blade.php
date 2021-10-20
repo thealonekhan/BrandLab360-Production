@@ -6,7 +6,7 @@
 <div class="container-fluid">
   <div class="fade-in">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
         <div class="card">
           <div class="card-header"><h4>Create menu element</h4></div>
             <div class="card-body">
@@ -29,8 +29,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-success" type="submit">Save</button>
-                    <a class="btn btn-danger ml-1" href="{{ route('menu.menu.index') }}">Return</a>
+                    <button class="btn btn-success pb-0" type="submit">Save</button>
+                    <a class="btn btn-danger ml-1 pb-0" href="{{ route('menu.menu.index') }}">Return</a>
                 </form>
             </div>
           </div>

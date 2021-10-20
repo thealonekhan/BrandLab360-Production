@@ -86,7 +86,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="{{ route('menu.index', ['menu' => $menuElement->menu_id]) }}">Return</a>
+                    <a class="btn btn-primary custom-btn-color" href="{{ route('menu.index', ['menu' => $menuElement->menu_id]) }}">Return</a>
             </div>
           </div>
         </div>

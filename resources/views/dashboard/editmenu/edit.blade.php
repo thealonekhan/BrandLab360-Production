@@ -6,7 +6,7 @@
 <div class="container-fluid">
   <div class="fade-in">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
         <div class="card">
           <div class="card-header"><h4>Edit menu element</h4></div>
             <div class="card-body">
@@ -137,13 +137,13 @@
                                     </div>
                                     <br><br>
                                     <div id="div-icon">
-                                        Icon - Find icon class in: 
+                                        <!-- Icon - Find icon class in: 
                                         <a 
                                             href="https://coreui.io/docs/icons/icons-list/#coreui-icons-free-502-icons"
                                             target="_blank"
                                         >
                                             CoreUI icons documentation
-                                        </a>
+                                        </a> -->
                                         <br>
                                         <input 
                                             class="form-control" 
@@ -157,8 +157,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-success" type="submit">Save</button>
-                    <a class="btn btn-danger ml-1" href="{{ route('menu.index', ['menu' => $menuElement->menu_id]) }}">Return</a>
+                    <button class="btn btn-success pb-0" type="submit">Save</button>
+                    <a class="btn btn-danger ml-1 pb-0" href="{{ route('menu.index', ['menu' => $menuElement->menu_id]) }}">Return</a>
                 </form>
             </div>
           </div>

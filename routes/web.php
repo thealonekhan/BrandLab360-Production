@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +37,7 @@ Route::group(['middleware' => ['get.menu']], function () {
     ]);
 
     Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('roles/delete/{id}', 'RolesController@delete')->name('roles.delete');
         Route::resource('roles', 'RolesController');
         Route::get('/roles/move/move-up', 'RolesController@moveUp')->name('roles.up');
         Route::get('/roles/move/move-down', 'RolesController@moveDown')->name('roles.down');
@@ -60,7 +63,24 @@ Route::group(['middleware' => ['get.menu']], function () {
         });
     });
     Route::middleware(['role:admin|manager'])->group(function () {
+        Route::get('users/delete/{id}', 'UsersController@delete')->name('users.delete');
+        Route::get('users-profile/{id}', 'UsersController@profile')->name('users.profile');
+        Route::put('users-profile/{id}', 'UsersController@update_profile')->name('users.profile.update');
         Route::resource('users', 'UsersController');
+        Route::get('projects/delete/{id}', 'ProjectController@delete')->name('projects.delete');
         Route::resource('projects', 'ProjectController');
     });
+});
+
+Route::get('/login', [LoginController::class, 'show'])->name('login.show');
+Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+
+
+Route::group(['middleware' => ['auth']], function() {
+    /**
+     * Logout Routes
+     */
+    Route::get('/change-password/{id}', 'UsersController@change_password')->name('users.change.password');
+    Route::put('/change-password/{id}', 'UsersController@update_password')->name('users.change.password.update');
+    Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
 });
