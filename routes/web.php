@@ -66,6 +66,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('users/delete/{id}', 'UsersController@delete')->name('users.delete');
         Route::get('users-profile/{id}', 'UsersController@profile')->name('users.profile');
         Route::put('users-profile/{id}', 'UsersController@update_profile')->name('users.profile.update');
+        Route::post('users-project-select-ajax', 'UsersController@project_select_ajax')->name('users.project.select.ajax');
         Route::resource('users', 'UsersController');
         Route::get('projects/delete/{id}', 'ProjectController@delete')->name('projects.delete');
         Route::resource('projects', 'ProjectController');

@@ -242,12 +242,14 @@ let settings = {!! str_replace('&quot;', '', json_encode((array)$settingConfig))
     function updateCounts(data) {
         
         var bounceRate = data['ga:bounceRate'];
+        var sessionsPerUser = data['ga:sessionsPerUser'];
         $('.sessionCount').text(data['ga:sessions']);
         $('.newUserCount').text(data['ga:newUsers']);
         $('.newVistCount').text(data['ga:newVisits']);
         $('.UserCount').text(data['ga:users']);
         $('.sessionDurationCount').text(convertHMS(data['ga:avgSessionDuration']));
         $('.bounceRateCount').text(parseFloat(bounceRate).toFixed(2)+"%");
+        $('.sessionsPerUser').text(parseFloat(sessionsPerUser).toFixed(2));
     }
 
     function convertHMS(value) {

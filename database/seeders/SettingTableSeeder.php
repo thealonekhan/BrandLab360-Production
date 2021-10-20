@@ -28,7 +28,8 @@ class SettingTableSeeder extends Seeder
                     'users' => 'on',
                     'visits' => 'on',
                     'bounceRate' => 'on',
-                    'avgSessionTime' => 'on'
+                    'avgSessionTime' => 'on',
+                    'sessionsPerUser' => 'on'
 
                 ],
                 'overview' => [
@@ -36,10 +37,12 @@ class SettingTableSeeder extends Seeder
                     'graph' => 'on',
                     'cards' => [
                         'active' => 'on',
+                        'users' => 'on',
                         'newUsers' => 'on',
                         'sessions' => 'on',
                         'avgSessionDuration' => 'on',
-                        'bounceRate' => 'on'
+                        'bounceRate' => 'on',
+                        'sessionsPerUser' => 'on'
                     ],
                     'pieGraph' => 'on'
                 ],

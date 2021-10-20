@@ -103,6 +103,12 @@
                                                     </label>
                                                 </li>
                                                 <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                    <label class="mr-0 ml-0"><strong>Number of Sessions per User:</strong></label>
+                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                        <input name="sessionsPerUser" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->sessionsPerUser == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                    </label>
+                                                </li>
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
                                                     <label class="mr-0 ml-0"><strong>BounceRate:</strong></label>
                                                     <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
                                                         <input name="bounceRate" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->bounceRate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -148,15 +154,27 @@
                                                 </li>
                                                     <ul class="list-group filters-child">
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">New Users:</p></label>
+                                                            <label class="mr-0 ml-2"><p class="mb-0">Users:</p></label>
                                                             <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardNewUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->newUsers == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                <input name="overviewCardUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->users == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                             </label>
                                                         </li>
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
                                                             <label class="mr-0 ml-2"><p class="mb-0">Sessions:</p></label>
                                                             <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
                                                                 <input name="overviewCardSessions" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessions == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                            <label class="mr-0 ml-2"><p class="mb-0">New Users:</p></label>
+                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                <input name="overviewCardNewUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->newUsers == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                            <label class="mr-0 ml-2"><p class="mb-0">Number of Sessions per User:</p></label>
+                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                <input name="overviewCardSessionsPerUser" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessionsPerUser == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                             </label>
                                                         </li>
                                                         <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">

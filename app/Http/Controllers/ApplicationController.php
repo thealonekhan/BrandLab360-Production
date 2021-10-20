@@ -63,6 +63,10 @@ class ApplicationController extends Controller
                 'name' => 'User',
                 'symbol' => ''
             ],
+            8 => [
+                'name' => 'Number of Session per User',
+                'symbol' => ''
+            ],
         ];
 
         $dateFormatPatrren = [
@@ -104,9 +108,10 @@ class ApplicationController extends Controller
         try {
             // Total Counts for sessions, pageviews, bounceRate, users, avgSessionDuration
             $gaAudienceOverViews = $analytics->performQuery($gaDateLimit,
-            'ga:sessions,ga:bounceRate,ga:newUsers,ga:avgSessionDuration,ga:users,ga:newVisits,ga:pageViews', [
+            'ga:sessions,ga:bounceRate,ga:newUsers,ga:avgSessionDuration,ga:users,ga:newVisits,ga:pageViews,ga:sessionsPerUser', [
                 'dimensions' => $gaOverviewDimentions
             ]);
+
 
             // Pie Chart: GA New Visits and Returning Visitors
             $gaAudienceOverViewsPercentage = $analytics->performQuery($gaDateLimit,
@@ -124,7 +129,6 @@ class ApplicationController extends Controller
             $gaAllDevices = $analytics->performQuery($gaDateLimit,'ga:sessions',[
                 'dimensions' => 'ga:deviceCategory'
             ]);
-            
             // Total Distribution of Traffic sources
             $gaAllTrafficOrganic = $analytics->performQuery($gaDateLimit,'ga:sessions',[
                 'dimensions' => 'ga:source',
@@ -140,6 +144,12 @@ class ApplicationController extends Controller
                 'dimensions' => 'ga:source',
                 'segment' => 'gaid::-8'
             ]);
+            
+            $gaAllTrafficSocial = $analytics->performQuery($gaDateLimit,'ga:sessions',[
+                'dimensions' => 'ga:socialNetwork',
+                'segment' => 'gaid::-1'
+            ]);
+            
         } catch (\Throwable $th) {
             return view('dashboard.homepage-nodata');
         }
@@ -159,17 +169,16 @@ class ApplicationController extends Controller
         if (!empty($gaAllDevices->rows)) {
             $devicesData = $this->setDeviceRows($gaAllDevices->rows);
         }
-        
         $trafficData = $this->setTrafficRows(
             $gaAllTrafficOrganic->totalsForAllResults, 
             $gaAllTrafficDirect->totalsForAllResults, 
-            $gaAllTrafficReferal->totalsForAllResults
+            $gaAllTrafficReferal->totalsForAllResults,
+            $gaAllTrafficSocial->rows,
         );
         
         $settings = Setting::where('user_id', auth()->user()->id)->first();
         $settingConfig = json_decode($settings->config);
         
-        // dd($settingConfig);
         if($request->ajax()){
             $eventTabView = view('dashboard.home.event-tabs-data', compact('eventData', 'settingConfig'))->render();
             return response()->json([
@@ -210,12 +219,20 @@ class ApplicationController extends Controller
         return $results;
     }
     
-    public function setTrafficRows($organicData, $directData, $referralData)
+    public function setTrafficRows($organicData, $directData, $referralData, $socialData)
     {
+        $socialCount = 0;
+        foreach ($socialData as $key => $value) {
+            if ($value[0] != "(not set)") {
+                $socialCount = $socialCount + $value[1];
+            }
+        }
+
         return [
             'organic' => $organicData['ga:sessions'],
             'direct' => $directData['ga:sessions'],
-            'referral' => $referralData['ga:sessions']
+            'referral' => $referralData['ga:sessions'],
+            'social' => (String) $socialCount
         ];
     }
 
@@ -226,12 +243,11 @@ class ApplicationController extends Controller
         foreach ($data as $key => $value) { 
             $gaDate = Carbon::createFromFormat($dateFormat, $value[0])->format($dateFormatAssign);
             if (\Arr::exists($graphResults, $gaDate)) {
-                $graphResults[$gaDate] = $graphResults[$gaDate] + ($matricIndex == 4 ? (float)$value[$matricIndex]: (int)$value[$matricIndex]);
+                $graphResults[$gaDate] = $graphResults[$gaDate] + ($matricIndex == 4 || $matricIndex == 8  ? (float)$value[$matricIndex]: (int)$value[$matricIndex]);
             } else {
-                $graphResults[$gaDate] = $matricIndex == 4 ? (float)$value[$matricIndex] : (int)$value[$matricIndex];
+                $graphResults[$gaDate] = $matricIndex == 4 || $matricIndex == 8 ? (float)$value[$matricIndex] : (int)$value[$matricIndex];
             }
         }
-
         return $graphResults;
     }
 

@@ -7,6 +7,7 @@
 			<option value="2">Bounce Rate</option>
 			<option value="3">New user</option>
 			<option value="4">Avg. Session Duration</option>
+			<option value="8">Number of Sessions per User</option>
 		</select>
 	</div>
     @endif

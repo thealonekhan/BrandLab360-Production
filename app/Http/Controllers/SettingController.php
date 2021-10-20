@@ -78,16 +78,19 @@ class SettingController extends Controller
                 "visits" => !empty($request->visits) ? $request->visits : "off",
                 "bounceRate" => !empty($request->bounceRate) ? $request->bounceRate : "off",
                 "avgSessionTime" => !empty($request->avgSessionTime) ? $request->avgSessionTime : "off",
+                "sessionsPerUser" => !empty($request->sessionsPerUser) ? $request->sessionsPerUser : "off",
             ],
             "overview" => [
                 "active" => !empty($request->overview) ? $request->overview : "off",
                 "graph" => !empty($request->graph) ? $request->graph : "off",
                 "cards" => [
                     "active" => !empty($request->overviewCards) ? $request->overviewCards : "off",
+                    "users" => !empty($request->overviewCardUsers) ? $request->overviewCardUsers : "off",
                     "newUsers" => !empty($request->overviewCardNewUsers) ? $request->overviewCardNewUsers : "off",
                     "sessions" => !empty($request->overviewCardSessions) ? $request->overviewCardSessions : "off",
                     "avgSessionDuration" => !empty($request->overviewCardAvgSessionDuration) ? $request->overviewCardAvgSessionDuration : "off",
                     "bounceRate" => !empty($request->overviewCardBounceRate) ? $request->overviewCardBounceRate : "off",
+                    "sessionsPerUser" => !empty($request->overviewCardSessionsPerUser) ? $request->overviewCardSessionsPerUser : "off",
                 ],
                 "pieGraph" => !empty($request->pieGraph) ? $request->pieGraph : "off",
 

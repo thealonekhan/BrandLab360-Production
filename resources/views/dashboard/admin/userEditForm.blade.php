@@ -45,7 +45,7 @@
                                     <span class="input-group-text">Role</span>
                                 </div>
                               <select class="form-control" name="menuroles" id="menuroles">
-                                  @foreach($roles as $role)
+                                  @foreach($roles->sortDesc() as $role)
                                       @if($role->name == $user->menuroles)
                                           <option value="{{ $user->menuroles }}" selected>{{ $user->menuroles }}</option>
                                       @else
@@ -63,7 +63,7 @@
                                   <option value="{{ $projects->project->id }}">{{ $projects->project->title }}</option>
                                 @else
                                   @foreach($projects as $project)
-                                    <option value="{{ $project->id }}">{{ $project->title }}</option>
+                                    <option value="{{ $project->id }}" {{$project->id == $selectedProjectId ? "selected" : ""}}>{{ $project->title }}</option>
                                   @endforeach
                                 @endif
                                 </select>

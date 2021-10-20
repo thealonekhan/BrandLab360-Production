@@ -84,12 +84,25 @@ class UsersController extends Controller
         
         $user->assignRole($request->input('menuroles'));
 
-        $projectManagement = new ProjectManagement();
-        $projectManagement->user_id = $user->id;
-        $projectManagement->project_id = $request->input('project_id');
-        $projectManagement->created_by = $you->id;
-        $projectManagement->enabled = true;
-        $projectManagement->save();
+        if ($request['project_id'] == 'All') {
+            $flag = 0; 
+            foreach (Project::all() as $project) {
+                $projectManagement = new ProjectManagement();
+                $projectManagement->user_id = $user->id;
+                $projectManagement->project_id = $project->id;
+                $projectManagement->created_by = $you->id;
+                $projectManagement->enabled = $flag == 0 ? true : 0;
+                $projectManagement->save();
+                $flag = $flag + 1;
+            }
+        } else {
+            $projectManagement = new ProjectManagement();
+            $projectManagement->user_id = $user->id;
+            $projectManagement->project_id = $request->input('project_id');
+            $projectManagement->created_by = $you->id;
+            $projectManagement->enabled = true;
+            $projectManagement->save();
+        }
 
         $this->createSettings($user->id);
 
@@ -116,14 +129,20 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $you = auth()->user();
+        $selectedProjectId = '';
         if ($you->hasRole('manager')) {
             $roles = Role::where('name', '!=', 'admin')->get();
             $projects = ProjectManagement::with('project')->where('user_id', $you->id)->first();
         } else {
+            $edit_user_role = $user->getRoleNames()[0];
+            if ($edit_user_role != 'admin') {
+                $selectedProject = ProjectManagement::where('user_id', $user->id)->first();
+                $selectedProjectId = $selectedProject->project_id;
+            }
             $projects = Project::all();
             $roles = Role::all();
         }
-        return view('dashboard.admin.userEditForm', compact('user', 'roles', 'projects'));
+        return view('dashboard.admin.userEditForm', compact('user', 'roles', 'projects', 'selectedProjectId'));
     }
 
     /**
@@ -142,7 +161,9 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->name       = $request->input('name');
         $user->email      = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
+        if ($request->input('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
         $user->menuroles = $request->input('menuroles');
         $user->save();
         
@@ -198,7 +219,8 @@ class UsersController extends Controller
                 'users' => 'on',
                 'visits' => 'on',
                 'bounceRate' => 'on',
-                'avgSessionTime' => 'on'
+                'avgSessionTime' => 'on',
+                'sessionsPerUser' => 'on'
 
             ],
             'overview' => [
@@ -206,10 +228,12 @@ class UsersController extends Controller
                 'graph' => 'on',
                 'cards' => [
                     'active' => 'on',
+                    'users' => 'on',
                     'newUsers' => 'on',
                     'sessions' => 'on',
                     'avgSessionDuration' => 'on',
-                    'bounceRate' => 'on'
+                    'bounceRate' => 'on',
+                    'sessionsPerUser' => 'on'
                 ],
                 'pieGraph' => 'on'
             ],
@@ -293,5 +317,20 @@ class UsersController extends Controller
         $user->save();
         $request->session()->flash('message', 'Successfully updated user password');
         return redirect()->route('dashboard.overview.ajax');
+    }
+
+    public function project_select_ajax(Request $request)
+    {
+        $you = auth()->user();
+        if ($request->get('role') != 'admin') {
+            if ($you->hasRole('admin')) {
+                $projects = Project::all();
+            } else {
+                $projects = ProjectManagement::with('project')->where('user_id', $you->id)->first();
+            }
+        } else {
+            $projects = 'All';
+        }
+        return view('dashboard.admin.project-select-ajax', compact( 'projects' ))->render();
     }
 }
