@@ -75,7 +75,8 @@ class UsersAndNotesSeeder extends Seeder
             'password' => Hash::make('admin@ga'),
             'remember_token' => Str::random(10),
             'menuroles' => 'admin',
-            'created_by' => 1
+            'created_by' => 1,
+            'password_change_at' => \Carbon\Carbon::now()
         ]);
         $user->assignRole('admin');
         // $user->assignRole('manager');
