@@ -65,7 +65,7 @@
                               @endif
                               </select>
                             </div>
-                            <button class="btn btn-success pb-0" type="submit">{{ __('Save') }}</button>
+                            <button class="btn btn-success pb-0 custom-btn-color" type="submit">{{ __('Save') }}</button>
                             <a href="{{ route('users.index') }}" class="btn btn-danger ml-1 pb-0">{{ __('Return') }}</a> 
                         </form>
                     </div>

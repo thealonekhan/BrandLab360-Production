@@ -47,7 +47,7 @@
                                 </select>
                             </div>
                             <div class="form-group row">
-                              <button class="btn btn-success pb-0" type="submit">{{ __('Save') }}</button>
+                              <button class="btn btn-success pb-0 custom-btn-color" type="submit">{{ __('Save') }}</button>
                               <a href="{{ route('projects.index') }}" class="btn btn-danger ml-2 pb-0">{{ __('Return') }}</a>  
                             </div>
                             <!-- <button class="btn btn-sm btn-danger float-right ml-2" type="reset"> Reset</button> -->

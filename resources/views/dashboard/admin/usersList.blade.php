@@ -36,14 +36,14 @@
 											<td>{{ $user->menuroles }}</td>
 											<td>{{ $user->email_verified_at }}</td>
 											<td>
-												<a href="{{ url('/users/' . $user->id) }}" class="btn btn-block btn-primary custom-btn-color">View</a>
+												<a href="{{ url('/users/' . $user->id) }}" class="btn btn-primary custom-btn-color">View</a>
 											</td>
 											<td>
-												<a href="{{ url('/users/' . $user->id . '/edit') }}" class="btn btn-block btn-primary custom-btn-color">Edit</a>
+												<a href="{{ url('/users/' . $user->id . '/edit') }}" class="btn btn-primary custom-btn-color">Edit</a>
 											</td>
 											<td>
 												@if( $you->id !== $user->id )
-												<a id="modal-delete-btn" data-attr="{{ route('users.delete', $user->id ) }}" class="btn btn-block btn-danger pb-0">Delete</a>
+												<a id="modal-delete-btn" data-attr="{{ route('users.delete', $user->id ) }}" class="btn btn-primary btn-danger pb-0">Delete</a>
 												<!-- <form action="{{ route('users.destroy', $user->id ) }}" method="POST">
 														@method('DELETE')
 														@csrf

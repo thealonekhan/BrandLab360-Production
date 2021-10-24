@@ -38,13 +38,13 @@
                                   </span>
                               </td>
                               <td>
-                                <a href="{{ url('/projects/' . $project->id) }}" class="btn btn-block btn-primary custom-btn-color">View</a>
+                                <a href="{{ url('/projects/' . $project->id) }}" class="btn btn-primary custom-btn-color">View</a>
                               </td>
                               <td>
-                                <a href="{{ url('/projects/' . $project->id . '/edit') }}" class="btn btn-block btn-primary custom-btn-color">Edit</a>
+                                <a href="{{ url('/projects/' . $project->id . '/edit') }}" class="btn btn-primary custom-btn-color">Edit</a>
                               </td>
                               <td>
-                                <a id="modal-delete-btn" data-attr="{{ route('projects.delete', $project->id ) }}" class="btn btn-block btn-danger pb-0">Delete</a>
+                                <a id="modal-delete-btn" data-attr="{{ route('projects.delete', $project->id ) }}" class="btn btn-primary btn-danger pb-0">Delete</a>
                                 <!-- <form action="{{ route('projects.destroy', $project->id ) }}" method="POST">
                                     @method('DELETE')
                                     @csrf

@@ -29,7 +29,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-success pb-0" type="submit">Save</button>
+                    <button class="btn btn-success pb-0 custom-btn-color" type="submit">Save</button>
                     <a class="btn btn-danger ml-1 pb-0" href="{{ route('menu.menu.index') }}">Return</a>
                 </form>
             </div>
