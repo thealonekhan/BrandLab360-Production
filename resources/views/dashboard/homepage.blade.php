@@ -246,7 +246,7 @@ let settings = {!! str_replace('&quot;', '', json_encode((array)$settingConfig))
         $('.sessionCount').text(data['ga:sessions']);
         $('.newUserCount').text(data['ga:newUsers']);
         $('.newVistCount').text(data['ga:newVisits']);
-        $('.UserCount').text(data['ga:users']);
+        $('.userCount').text(data['ga:users']);
         $('.sessionDurationCount').text(convertHMS(data['ga:avgSessionDuration']));
         $('.bounceRateCount').text(parseFloat(bounceRate).toFixed(2)+"%");
         $('.sessionsPerUser').text(parseFloat(sessionsPerUser).toFixed(2));
