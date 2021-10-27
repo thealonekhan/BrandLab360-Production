@@ -22,7 +22,7 @@
                 <div class="row">
                     @if($overviewSettings->cards->users == "on")
                     <div class="col-md-6 col-sm-12 col-md mb-sm-5 mb-0">
-                        <div class="text-muted">Users</div><strong class="UserCount">{{$overviewCounts['ga:users']}}</strong>
+                        <div class="text-muted">Users</div><strong class="userCount">{{$overviewCounts['ga:users']}}</strong>
                         <div class="progress progress-xs mt-2">
                             <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
