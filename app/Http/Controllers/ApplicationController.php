@@ -222,12 +222,14 @@ class ApplicationController extends Controller
     public function setTrafficRows($organicData, $directData, $referralData, $socialData)
     {
         $socialCount = 0;
-        foreach ($socialData as $key => $value) {
-            if ($value[0] != "(not set)") {
-                $socialCount = $socialCount + $value[1];
+        if (!empty($socialData)) {
+            foreach ($socialData as $key => $value) {
+                if ($value[0] != "(not set)") {
+                    $socialCount = $socialCount + $value[1];
+                }
             }
         }
-
+        
         return [
             'organic' => $organicData['ga:sessions'],
             'direct' => $directData['ga:sessions'],
