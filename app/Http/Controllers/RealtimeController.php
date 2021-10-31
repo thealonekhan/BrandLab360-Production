@@ -39,7 +39,7 @@ class RealtimeController extends Controller
         try { // check if GA analytics ID is valid
             $this->realtime = GoogleAnalyticsRealtimeApi::getAnalyticsRealtime();
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            // dd($th->getMessage());
             return view('dashboard.homepage-nodata');
         }
         
