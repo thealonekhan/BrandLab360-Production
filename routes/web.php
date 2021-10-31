@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\LogoutController;
 Route::group(['middleware' => ['get.menu']], function () {
     Route::any('/', [ApplicationController::class, 'index'])->name('dashboard.overview.ajax');
     Route::any('/audience/overview', 'AudienceController@overview')->name('audience.overview.ajax');
+    Route::any('/realtime/overview', 'RealtimeController@overview')->name('realtime.overview.ajax');
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');
     Route::any('/behavior/event/overview', 'BehaviorController@overview')->name('behavior.overview.ajax');
     Route::resource('settings', 'SettingController');
