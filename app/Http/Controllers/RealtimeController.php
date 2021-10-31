@@ -32,12 +32,14 @@ class RealtimeController extends Controller
         ->first();
 
         if (!$projectAnalytics) { // if There no project created
+            dd('yes1');
             return view('dashboard.homepage-nodata');
         }
         Config::set('dashboard.tiles.google_analytics_realtime.view_id', $projectAnalytics->project->analytics_view_id);
         try { // check if GA analytics ID is valid
             $this->realtime = GoogleAnalyticsRealtimeApi::getAnalyticsRealtime();
         } catch (\Throwable $th) {
+            dd('yes2');
             return view('dashboard.homepage-nodata');
         }
         
