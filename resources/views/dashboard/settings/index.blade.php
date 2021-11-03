@@ -280,53 +280,52 @@
                         <!-- /tab-pane -->
 
                         <div class="tab-pane" id="events" role="tabpanel">
-                            
-                            <div class="card col-md-4">
-                                <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="card-body">
 
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                            <label class="mr-0 mb-0"><strong>Events:</strong></label>
-                                            <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
-                                                <input name="events" class="c-switch-input filter-head" type="checkbox" {{ $config->events->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                            </label>
-                                            <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
-                                        </li>
-                                        <ul class="list-group filters-child">
-                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                <label class="mr-0 ml-0 mb-0"><strong>Event Tabs:</strong></label>
-                                            </li>
-                                            @foreach($eventTabs as $tab)
-                                                <?php 
-                                                    $checked = '';
-                                                    if($config->events->eventTabs) {
-                                                        // dd($settings->eventTabs);
-                                                        $checked = in_array($tab, $config->events->eventTabs) ? "checked" : "";
-                                                    }
-                                                ?>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <div class="form-check checkbox col-md-4 ml-2">
-                                                        <input class="form-check-input filter-child" id="{{$tab}}" name="eventTabs[]" type="checkbox" value="{{$tab}}" {{ $checked }}>
-                                                        <label class="form-check-label" for="{{$tab}}">{{$tab}}</label>
-                                                    </div>
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>Events:</strong></label>
+                                                    <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
+                                                        <input name="events" class="c-switch-input filter-head" type="checkbox" {{ $config->events->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                    </label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
                                                 </li>
-                                                
-                                            @endforeach
-                                        </ul>   
-                                        <!-- /UL -->
-                                    </ul>
-                                    <!-- /UL -->
-                                    
-
-                                    
-
-                                </div>  
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0 mb-0"><strong>Event Tabs:</strong></label>
+                                                    </li>
+                                                    @foreach($eventTabs as $tab)
+                                                        <?php 
+                                                            $checked = '';
+                                                            if($config->events->eventTabs) {
+                                                                // dd($settings->eventTabs);
+                                                                $checked = in_array($tab, $config->events->eventTabs) ? "checked" : "";
+                                                            }
+                                                        ?>
+                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                            <div class="form-check checkbox ml-2">
+                                                                <input class="form-check-input filter-child" id="{{$tab}}" name="eventTabs[]" type="checkbox" value="{{$tab}}" {{ $checked }}>
+                                                                <label class="form-check-label" for="{{$tab}}">{{$tab}}</label>
+                                                            </div>
+                                                        </li>
+                                                        
+                                                    @endforeach
+                                                </ul>   
+                                                <!-- /UL -->
+                                            </ul>
+                                            <!-- /UL -->
+                                        </div>  
+                                    </div>
+                                    <!-- /card -->
+                                </div>
+                                <!-- col -->
                             </div>
-                            <!-- /card -->
-
+                            <!-- row -->
                         </div>
                         <!-- /tab-pane -->
-
                     </div>
                     <!-- /tab-content -->
                 </div>
