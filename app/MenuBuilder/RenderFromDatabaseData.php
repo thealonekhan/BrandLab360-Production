@@ -6,11 +6,13 @@
 
 namespace App\MenuBuilder;
 use App\MenuBuilder\MenuBuilder;
+use App\Models\Setting;
 
 class RenderFromDatabaseData{
 
     private $mb; // MenuBuilder
     private $data;
+    private $setting_config;
 
     public function __construct(){
         $this->mb = new MenuBuilder();
@@ -48,19 +50,38 @@ class RenderFromDatabaseData{
 
     private function mainLoop(){
         for($i = 0; $i<count($this->data); $i++){
-            switch($this->data[$i]['slug']){
-                case 'title':
-                    $this->addTitle($this->data[$i]);
-                break;
-                case 'link':
-                    $this->addLink($this->data[$i]);
-                break;
-                case 'dropdown':
-                    if($this->data[$i]['parent_id'] == null){
-                        $this->addDropdown($this->data[$i]);
-                    }
-                break;
+            if($this->data[$i]['name'] == "Realtime") {
+
+            } else {
+
             }
+            switch ($this->data[$i]['name']) {
+                case 'Realtime':
+                    if ($this->setting_config->realtime->liveUserWidget == "on") {
+                        $this->generate_links($this->data, $i);
+                    }
+                    break;
+                
+                default:
+                    $this->generate_links($this->data, $i);
+                    break;
+            }
+        }
+    }
+
+    public function generate_links($data, $index) {
+        switch($data[$index]['slug']){
+            case 'title':
+                $this->addTitle($data[$index]);
+            break;
+            case 'link':
+                $this->addLink($data[$index]);
+            break;
+            case 'dropdown':
+                if($data[$index]['parent_id'] == null){
+                    $this->addDropdown($data[$index]);
+                }
+            break;
         }
     }
 
@@ -69,7 +90,10 @@ class RenderFromDatabaseData{
      * return - array
      */
     public function render($data){
+        $settings = Setting::where('user_id', auth()->user()->id)->first();
+        $config = json_decode($settings->config);
         if(!empty($data)){
+            $this->setting_config = $config;
             $this->data = $data;
             $this->mainLoop();
         }

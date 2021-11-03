@@ -50,6 +50,9 @@ class SettingTableSeeder extends Seeder
                     'devices' => 'on',
                     'traffic' => 'on'
                 ],
+                'realtime' => [
+                    'liveUserWidget' => 'on',
+                ],
                 'events' => [
                     'active' => 'on',
                     'eventTabs' => ['Location', 'Product', 'Video']

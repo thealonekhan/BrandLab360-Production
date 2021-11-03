@@ -99,6 +99,9 @@ class SettingController extends Controller
                 "devices" => !empty($request->devices) ? $request->devices : "off",
                 "traffic" => !empty($request->traffic) ? $request->traffic : "off",
             ],
+            "realtime" => [
+                "liveUserWidget" => !empty($request->liveUserWidget) ? $request->liveUserWidget : "off",
+            ],
             "events" => [
                 "active" => !empty($request->events) ? $request->events : "off",
                 "eventTabs" => $request->eventTabs
