@@ -33,232 +33,248 @@
                     <div class="tab-content">
 
                         <div class="tab-pane active" id="general" role="tabpanel">
-                            <div class="card-group">
-                                <div class="card">
-                                    <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="card-body">
 
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                                <label class="mr-0 mb-0"><strong>Filters:</strong></label>
-                                                <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
-                                                    <input name="filters" class="c-switch-input filter-head" type="checkbox" {{ $config->filters->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                </label>
-                                                <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
-                                            </li>
-                                            <ul class="list-group filters-child">
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Matrix:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="matrix" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->filters->matrix == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Quick Date:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="quickDate" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->filters->quickDate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Datepicker:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="datepicker" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->filters->datepicker == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                            <!-- /UL -->
-                                        </ul>
-                                        <!-- /UL -->
-                                    </div>
-                                    <!-- card-body -->
-                                </div>
-                                <!-- card -->
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                                <label class="mr-0 mb-0"><strong>Top Cards:</strong></label>
-                                                <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
-                                                    <input name="topCards" class="c-switch-input filter-head" type="checkbox" {{ $config->topCards->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                </label>
-                                                <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
-                                            </li>
-                                            <ul class="list-group filters-child">
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Sessions:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="sessions" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->sessions == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Users:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="users" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->users == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Visits:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="visits" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->visits == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Number of Sessions per User:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="sessionsPerUser" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->sessionsPerUser == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>BounceRate:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="bounceRate" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->bounceRate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Avg. Session Time:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="avgSessionTime" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->avgSessionTime == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                            <!-- /UL -->
-                                        </ul>
-                                        <!-- /UL -->
-                                    </div>
-                                    <!-- card-body -->
-                                </div>
-                                <!-- card -->
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                                <label class="mr-0 mb-0"><strong>Overview:</strong></label>
-                                                <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
-                                                    <input name="overview" class="c-switch-input filter-head" type="checkbox" {{ $config->overview->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                </label>
-                                                <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
-                                            </li>
-                                            <ul class="list-group filters-child">
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Graph:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="graph" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->overview->graph == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Cards:</strong></label>
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>Filters:</strong></label>
                                                     <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
-                                                        <input name="overviewCards" class="c-switch-input c-switch-sm filter-child overview-card-head" type="checkbox" {{ $config->overview->cards->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        <input name="filters" class="c-switch-input filter-head" type="checkbox" {{ $config->filters->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                     </label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
                                                 </li>
-                                                    <ul class="list-group filters-child">
-                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">Users:</p></label>
-                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->users == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">Sessions:</p></label>
-                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardSessions" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessions == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">New Users:</p></label>
-                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardNewUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->newUsers == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">Number of Sessions per User:</p></label>
-                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardSessionsPerUser" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessionsPerUser == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">Avg. Session Duration:</p></label>
-                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardAvgSessionDuration" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->avgSessionDuration == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                            <label class="mr-0 ml-2"><p class="mb-0">Bounce Rate:</p></label>
-                                                            <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                                <input name="overviewCardBounceRate" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->bounceRate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                            </label>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- /UL -->
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Pie Graph:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="pieGraph" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->overview->pieGraph == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Matrix:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="matrix" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->filters->matrix == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Quick Date:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="quickDate" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->filters->quickDate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Datepicker:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="datepicker" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->filters->datepicker == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <!-- /UL -->
                                             </ul>
                                             <!-- /UL -->
-                                        </ul>
-                                        <!-- /UL -->
+                                        </div>
+                                        <!-- card-body -->
                                     </div>
-                                    <!-- card-body -->
+                                    <!-- card -->
                                 </div>
-                                <!-- card -->
-                                <div class="card">
-                                    <div class="card-body">
+                                <!-- /col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="card-body">
 
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                                <label class="mr-0 mb-0"><strong>General Graphs:</strong></label>
-                                                <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
-                                            </li>
-                                            <ul class="list-group filters-child">
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Devices:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="devices" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->graphs->devices == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>Top Cards:</strong></label>
+                                                    <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
+                                                        <input name="topCards" class="c-switch-input filter-head" type="checkbox" {{ $config->topCards->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                     </label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
                                                 </li>
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Traffic:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="traffic" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->graphs->traffic == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                                    </label>
-                                                </li>
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Sessions:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="sessions" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->sessions == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Users:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="users" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->users == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Visits:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="visits" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->visits == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Number of Sessions per User:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="sessionsPerUser" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->sessionsPerUser == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>BounceRate:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="bounceRate" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->bounceRate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Avg. Session Time:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="avgSessionTime" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->topCards->avgSessionTime == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <!-- /UL -->
                                             </ul>
                                             <!-- /UL -->
-                                        </ul>
-                                        <!-- /UL -->
                                         </div>
-                                    <!-- card-body -->
+                                        <!-- card-body -->
+                                    </div>
+                                    <!-- card -->
                                 </div>
-                                <!-- card -->
-                                <div class="card">
-                                    <div class="card-body">
+                                <!-- col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="card-body">
 
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
-                                                <label class="mr-0 mb-0"><strong>Realtime:</strong></label>
-                                                <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
-                                            </li>
-                                            <ul class="list-group filters-child">
-                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
-                                                    <label class="mr-0 ml-0"><strong>Live Users:</strong></label>
-                                                    <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
-                                                        <input name="liveUserWidget" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->realtime->liveUserWidget == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>Overview:</strong></label>
+                                                    <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
+                                                        <input name="overview" class="c-switch-input filter-head" type="checkbox" {{ $config->overview->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                                     </label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
                                                 </li>
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Graph:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="graph" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->overview->graph == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Cards:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-success c-switch-sm mb-0">
+                                                            <input name="overviewCards" class="c-switch-input c-switch-sm filter-child overview-card-head" type="checkbox" {{ $config->overview->cards->active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                        <ul class="list-group filters-child">
+                                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                                <label class="mr-0 ml-2"><p class="mb-0">Users:</p></label>
+                                                                <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                    <input name="overviewCardUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->users == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                                <label class="mr-0 ml-2"><p class="mb-0">Sessions:</p></label>
+                                                                <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                    <input name="overviewCardSessions" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessions == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                                <label class="mr-0 ml-2"><p class="mb-0">New Users:</p></label>
+                                                                <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                    <input name="overviewCardNewUsers" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->newUsers == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                                <label class="mr-0 ml-2"><p class="mb-0">Number of Sessions per User:</p></label>
+                                                                <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                    <input name="overviewCardSessionsPerUser" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->sessionsPerUser == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                                <label class="mr-0 ml-2"><p class="mb-0">Avg. Session Duration:</p></label>
+                                                                <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                    <input name="overviewCardAvgSessionDuration" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->avgSessionDuration == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                                <label class="mr-0 ml-2"><p class="mb-0">Bounce Rate:</p></label>
+                                                                <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                                    <input name="overviewCardBounceRate" class="c-switch-input c-switch-sm filter-child overview-card-child" type="checkbox" {{ $config->overview->cards->bounceRate == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- /UL -->
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Pie Graph:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="pieGraph" class="c-switch-input c-switch-sm filter-child" type="checkbox" {{ $config->overview->pieGraph == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <!-- /UL -->
                                             </ul>
                                             <!-- /UL -->
-                                        </ul>
-                                        <!-- /UL -->
                                         </div>
-                                    <!-- card-body -->
+                                        <!-- card-body -->
+                                    </div>
+                                    <!-- card -->
                                 </div>
-                                <!-- card -->
+                                <!-- col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>General Graphs:</strong></label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
+                                                </li>
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Devices:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="devices" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->graphs->devices == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Traffic:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="traffic" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->graphs->traffic == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <!-- /UL -->
+                                            </ul>
+                                            <!-- /UL -->
+                                            </div>
+                                        <!-- card-body -->
+                                    </div>
+                                    <!-- card -->
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>Realtime:</strong></label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
+                                                </li>
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Live Users:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="liveUserWidget" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->realtime->liveUserWidget == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <!-- /UL -->
+                                            </ul>
+                                            <!-- /UL -->
+                                            </div>
+                                        <!-- card-body -->
+                                    </div>
+                                    <!-- card -->
+                                </div>
+                                <!-- col -->
+                                <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+                                    
+                                </div> -->
+                                <!-- col -->
                             </div>
-                            <!-- card-group -->
+                            <!-- row -->
 
                         </div>
                         <!-- /tab-pane -->
@@ -335,6 +351,13 @@
 
     .list-group{
         border-radius: 0;
+    }
+    .card-body{
+        padding: 0.6rem;
+    }
+    .col-md-3{
+        padding-right: 8px;
+        padding-left: 8px;
     }
 
 </style>
