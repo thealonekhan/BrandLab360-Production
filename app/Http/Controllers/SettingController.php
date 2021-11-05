@@ -8,6 +8,7 @@ use Analytics;
 use Spatie\Analytics\Period;
 use AnalyticsHelper;
 use App\Models\ProjectManagement;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -21,7 +22,7 @@ class SettingController extends Controller
     {
         $this->middleware('auth');
         $this->helper = $helper;
-        if (auth()->user()->password_change_at == null) {
+        if (Auth::user()->password_change_at == null) {
             return redirect(route('users.change.password', Auth::user()->id));
         }
     }

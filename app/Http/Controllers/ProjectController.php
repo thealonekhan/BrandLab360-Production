@@ -9,6 +9,7 @@ use App\Models\ProjectManagement;
 use App\Rules\VerifyAnalytic;
 use AnalyticsHelper;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 class ProjectController extends Controller
 {
     private $helper;
@@ -21,7 +22,7 @@ class ProjectController extends Controller
     {
         $this->middleware('auth');
         $this->helper = $helper;
-        if (auth()->user()->password_change_at == null) {
+        if (Auth::user()->password_change_at == null) {
             return redirect(route('users.change.password', Auth::user()->id));
         }
     }

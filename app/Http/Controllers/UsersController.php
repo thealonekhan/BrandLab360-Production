@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\Setting;
 use App\Models\ProjectManagement;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -24,7 +25,7 @@ class UsersController extends Controller
         $this->middleware('auth');
         // $this->middleware('admin');
         // $this->middleware('manager');
-        if (auth()->user()->password_change_at == null) {
+        if (Auth::user()->password_change_at == null) {
             return redirect(route('users.change.password', Auth::user()->id));
         }
     }
