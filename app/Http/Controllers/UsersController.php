@@ -293,8 +293,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function change_password($id)
+    public function change_password(Request $request, $id)
     {
+        if ($id != auth()->user()->id) {
+            $request->session()->flash('error', 'Invalid User Identification!');
+            return redirect()->route('users.change.password', auth()->user()->id);
+        }
         $user = User::find($id);
         return view('dashboard.admin.userPasswordForm', compact('user'));
     }
