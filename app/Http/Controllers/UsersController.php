@@ -23,11 +23,6 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('admin');
-        // $this->middleware('manager');
-        if (Auth::user()->password_change_at == null) {
-            return redirect(route('users.change.password', Auth::user()->id));
-        }
     }
 
     /**
@@ -37,7 +32,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // dd(auth()->user()->getRoleNames());
         $you = auth()->user();
         if ($you->hasRole('admin')) {
             $users = User::all();

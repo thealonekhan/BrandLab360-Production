@@ -14,12 +14,12 @@ use App\Http\Controllers\Auth\LogoutController;
 */
 
 Route::group(['middleware' => ['get.menu']], function () {
-    Route::any('/', [ApplicationController::class, 'index'])->name('dashboard.overview.ajax');
+    Route::any('/', [ApplicationController::class, 'index'])->name('dashboard.overview.ajax')->middleware('check.new.user.login');
     Route::any('/audience/overview', 'AudienceController@overview')->name('audience.overview.ajax');
-    Route::any('/realtime/overview', 'RealtimeController@overview')->name('realtime.overview.ajax');
+    Route::any('/realtime/overview', 'RealtimeController@overview')->name('realtime.overview.ajax')->middleware('check.new.user.login');
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');
     Route::any('/behavior/event/overview', 'BehaviorController@overview')->name('behavior.overview.ajax');
-    Route::resource('settings', 'SettingController');
+    Route::resource('settings', 'SettingController')->middleware('check.new.user.login');
     Route::any('/select-project', [ApplicationController::class, 'selectProject'])->name('dashboard.project.ajax');
     // Route::any('/behavior/event/topevents', 'BehaviorController@topevents')->name('behavior.topevents.ajax');
     Route::group(['middleware' => ['role:user']], function () {
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         'destroy'   => 'resource.destroy'
     ]);
 
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['role:admin', 'check.new.user.login']], function () {
         Route::get('roles/delete/{id}', 'RolesController@delete')->name('roles.delete');
         Route::resource('roles', 'RolesController');
         Route::get('/roles/move/move-up', 'RolesController@moveUp')->name('roles.up');
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/delete', 'MenuController@delete')->name('menu.menu.delete');
         });
     });
-    Route::middleware(['role:admin|manager'])->group(function () {
+    Route::middleware(['role:admin|manager', 'check.new.user.login'])->group(function () {
         Route::get('users/delete/{id}', 'UsersController@delete')->name('users.delete');
         Route::get('users-profile/{id}', 'UsersController@profile')->name('users.profile');
         Route::put('users-profile/{id}', 'UsersController@update_profile')->name('users.profile.update');

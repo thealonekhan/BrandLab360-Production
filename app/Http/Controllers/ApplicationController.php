@@ -29,11 +29,6 @@ class ApplicationController extends Controller
         
     public function index(Request $request)
     {
-
-        if ((Auth::user()->password_change_at == null)) {
-            return redirect(route('users.change.password', Auth::user()->id));
-        }
-
         $devicesData = [];
         $trafficData = [];
         $matricData = [];

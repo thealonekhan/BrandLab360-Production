@@ -22,9 +22,6 @@ class RealtimeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        if (Auth::user()->password_change_at == null) {
-            return redirect(route('users.change.password', Auth::user()->id));
-        }
     }
 
     public function overview(Request $request)
