@@ -32,7 +32,7 @@
                                 </div>
                                 <input class="form-control" type="password" placeholder="{{ __('Password') }}" name="password">
                             </div>
-                            <button class="btn btn-success pb-0" type="submit">{{ __('Update') }}</button>
+                            <button class="btn btn-success pb-0 custom-btn-color" type="submit">{{ __('Update') }}</button>
                         </form>
                     </div>
                 </div>

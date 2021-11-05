@@ -24,6 +24,9 @@ class UsersController extends Controller
         $this->middleware('auth');
         // $this->middleware('admin');
         // $this->middleware('manager');
+        if (Auth::user()->password_change_at == null) {
+            return redirect(route('users.change.password', Auth::user()->id));
+        }
     }
 
     /**

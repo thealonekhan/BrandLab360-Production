@@ -21,6 +21,9 @@ class SettingController extends Controller
     {
         $this->middleware('auth');
         $this->helper = $helper;
+        if (Auth::user()->password_change_at == null) {
+            return redirect(route('users.change.password', Auth::user()->id));
+        }
     }
 
     /**

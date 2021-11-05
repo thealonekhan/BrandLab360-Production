@@ -67,10 +67,12 @@
                   <use xlink:href="{{ url('/icons/sprites/free.svg#cil-comment-square') }}"></use>
                 </svg> Comments<span class="badge badge-warning ml-auto">42</span></a>
               <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div> -->
+              @if (auth()->user()->password_change_at != null)
               <a class="dropdown-item" href="{{url('/users-profile/'.auth()->user()->id)}}">
                 <svg class="c-icon mr-2">
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-user') }}"></use> -->
                 </svg> Profile</a>
+              @endif
                 <!-- <a class="dropdown-item" href="#">
                 <svg class="c-icon mr-2">
                   <use xlink:href="{{ url('/icons/sprites/free.svg#cil-settings') }}"></use>
@@ -79,7 +81,7 @@
                 <svg class="c-icon mr-2">
                   <use xlink:href="{{ url('/icons/sprites/free.svg#cil-credit-card') }}"></use>
                 </svg> Payments<span class="badge badge-secondary ml-auto">42</span></a> -->
-                @if(auth()->user()->hasRole('admin')) 
+                @if(auth()->user()->hasRole('admin') && auth()->user()->password_change_at != null) 
                 <a class="dropdown-item" href="{{url('/projects')}}">
                 <svg class="c-icon mr-2">
                   <!-- <use xlink:href="{{ url('/icons/sprites/free.svg#cil-file') }}"></use> -->
