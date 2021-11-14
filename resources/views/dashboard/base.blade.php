@@ -130,6 +130,11 @@
 
 				$('div.alert').delay(3000).slideUp(300);
 
+				$(".refresh-dashboard").on("click", function(e){
+					e.preventDefault();
+					location.reload();
+				});
+
 
 				$("#project-selection").on("change", function(){
 					var selectedProject = $(this).val();

@@ -72,6 +72,11 @@ class UsersController extends Controller
             'project_id' => 'required'
         ]);
         $you = auth()->user();
+
+        if (User::withTrashed()->where('email', $request['email'])->first()) {
+            User::withTrashed()->where('email', $request['email'])->forceDelete();
+        }
+
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');

@@ -113,4 +113,5 @@
             @endfor
           </ol>
         </div>
+        <a class="refresh-dashboard" href="#"><i class="c-icon c-icon-lg cil-sync"></i></a>
     </header>
