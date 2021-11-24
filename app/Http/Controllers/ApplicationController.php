@@ -172,10 +172,21 @@ class ApplicationController extends Controller
             $gaAllTrafficSocial->rows,
         );
         
-        $settings = Setting::where('user_id', auth()->user()->id)->where('override', true)->first();
-        if (!$settings) {
-            $settings = ProjectSetting::where('project_id', $projectAnalytics->project->id)->first();
+        $settings = null;
+        $general_settings = Setting::where('user_id', auth()->user()->id)->first();
+        $project_settings = ProjectSetting::where('project_id', $projectAnalytics->project->id)->first();
+
+        if (!empty($project_settings)) {
+            if ($general_settings->override) {
+                $settings = $general_settings;
+            } else {
+                $settings = $project_settings;
+            }
+        } else {
+            $settings = $general_settings;
         }
+        
+        // dd($settings);
         $settingConfig = json_decode($settings->config);
         
         if($request->ajax()){
