@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Setting;
 use App\Models\ProjectSetting;
+use App\Models\Project;
+use App\Models\Setting;
 use Analytics;
 use Spatie\Analytics\Period;
 use AnalyticsHelper;
 use App\Models\ProjectManagement;
 use Illuminate\Support\Facades\Auth;
 
-class SettingController extends Controller
+class ProjectSettingController extends Controller
 {
     private $helper;
     /**
@@ -30,18 +31,10 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($id)
     {
-        $projectAnalytics = ProjectManagement::with('project')
-        ->where('user_id', auth()->user()->id)
-        ->where('enabled', true)
-        ->first();
-
-        if (!$projectAnalytics) { // if There no project created
-            return view('dashboard.homepage-nodata');
-        }
-        $analytics = $this->helper->getView($projectAnalytics->project->analytics_view_id);
-        $projectID = $projectAnalytics->project->id;
+        $project = Project::find($id);
+        $analytics = $this->helper->getView($project->analytics_view_id);
 
         try { // check if GA analytics ID is valid
             $eventData = $analytics->performQuery(Period::days(365),
@@ -53,8 +46,12 @@ class SettingController extends Controller
         }
 
         $eventTabs = $this->setEventRows($eventData);
-        $settings = Setting::where('user_id', auth()->user()->id)->first();
-        return view('dashboard.settings.index', compact('settings', 'eventTabs', 'projectID'));
+        // $settings = ProjectSetting::where('project_id', $id)->first();
+        if (!$settings = ProjectSetting::where('project_id', $id)->first()) {
+            $settings = Setting::where('user_id', auth()->user()->id)->first();
+        }
+
+        return view('dashboard.settings.project-settings', compact('settings', 'eventTabs', 'project'));
     }
 
     /**
@@ -111,14 +108,25 @@ class SettingController extends Controller
             ]
         ];
         
-        $settings = Setting::find($id);
-        $settings->config = json_encode($config);
-        $settings->override = true;
-        $settings->save();
+        
+        if ($update_settings = ProjectSetting::where('project_id', $id)->first()) { // create
+            $update_settings->config = json_encode($config);
+            $update_settings->user_id = auth()->user()->id;
+            $update_settings->save();
+        } else { // update
+            $settings = new ProjectSetting();
+            $settings->config = json_encode($config);
+            $settings->user_id = auth()->user()->id;
+            $settings->project_id = $id;
+            $settings->save();
+        }
 
+        // update settings for all users of this project
+        $project_users =  ProjectManagement::where('project_id', $id)->pluck('user_id');
+        Setting::whereIn('user_id', $project_users)->update(['override' => false]);
 
-        $request->session()->flash('message', 'Successfully updated settings');
-        return redirect()->route('settings.index');
+        $request->session()->flash('message', 'Successfully updated project settings');
+        return redirect()->route('projects.index');
     }
 
     public function setEventRows($data)

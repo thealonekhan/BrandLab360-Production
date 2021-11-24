@@ -14,10 +14,9 @@
             <!-- col -->
     		<div class="col-md-12 mb-4">
 
-                <form method="POST" action="/settings/{{ $settings->id }}">
+                <form method="POST" action="/project-settings/{{ $project->id }}">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="project_id" value="{{$projectID}}" />
                 <div class="card">
                     <div class="card-header">
                         Dashboard Settings

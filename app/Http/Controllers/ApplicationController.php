@@ -8,6 +8,7 @@ use Analytics;
 use Spatie\Analytics\Period;
 use Carbon\Carbon;
 use App\Models\Setting;
+use App\Models\ProjectSetting;
 use AnalyticsHelper;
 use App\Models\ProjectManagement;
 use DB;
@@ -171,7 +172,10 @@ class ApplicationController extends Controller
             $gaAllTrafficSocial->rows,
         );
         
-        $settings = Setting::where('user_id', auth()->user()->id)->first();
+        $settings = Setting::where('user_id', auth()->user()->id)->where('override', true)->first();
+        if (!$settings) {
+            $settings = ProjectSetting::where('project_id', $projectAnalytics->project->id)->first();
+        }
         $settingConfig = json_decode($settings->config);
         
         if($request->ajax()){

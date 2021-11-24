@@ -255,6 +255,7 @@ class UsersController extends Controller
         $setting = new Setting();
         $setting->config = json_encode($config);
         $setting->user_id = $user_id;
+        $setting->override = false;
         $setting->save();
     }
 

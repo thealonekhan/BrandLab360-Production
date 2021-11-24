@@ -7,9 +7,12 @@ use App\Models\Project;
 use App\Models\Status;
 use App\Models\ProjectManagement;
 use App\Rules\VerifyAnalytic;
-use AnalyticsHelper;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Setting;
+use Analytics;
+use Spatie\Analytics\Period;
+use AnalyticsHelper;
 class ProjectController extends Controller
 {
     private $helper;
@@ -171,4 +174,5 @@ class ProjectController extends Controller
 
         return view('dashboard.projects.project-modal', compact('project'))->render();
     }
+
 }

@@ -38,6 +38,9 @@
                                   </span>
                               </td>
                               <td>
+                                <a href="{{ url('/project-settings/' . $project->id) }}" class="btn btn-primary custom-btn-color">Settings</a>
+                              </td>
+                              <td>
                                 <a href="{{ url('/projects/' . $project->id) }}" class="btn btn-primary custom-btn-color">View</a>
                               </td>
                               <td>

@@ -20,6 +20,7 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');
     Route::any('/behavior/event/overview', 'BehaviorController@overview')->name('behavior.overview.ajax');
     Route::resource('settings', 'SettingController')->middleware('check.new.user.login');
+    // Route::get('project-settings/{$id}', 'ProjectSettingController@project_settings')->middleware('check.new.user.login');
     Route::any('/select-project', [ApplicationController::class, 'selectProject'])->name('dashboard.project.ajax');
     // Route::any('/behavior/event/topevents', 'BehaviorController@topevents')->name('behavior.topevents.ajax');
     Route::group(['middleware' => ['role:user']], function () {
@@ -71,6 +72,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('users', 'UsersController');
         Route::get('projects/delete/{id}', 'ProjectController@delete')->name('projects.delete');
         Route::resource('projects', 'ProjectController');
+        Route::resource('project-settings', 'ProjectSettingController');
     });
 });
 
