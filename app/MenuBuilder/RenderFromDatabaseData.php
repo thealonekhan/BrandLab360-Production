@@ -98,7 +98,7 @@ class RenderFromDatabaseData{
         ->where('enabled', true)
         ->first();
         $projectID = $projectAnalytics->project->id;
-        if (!$settings = ProjectSetting::where('project_id', $projectID)->where('user_id', auth()->user()->id)->first()) {
+        if (!$settings = ProjectSetting::where('project_id', $projectID)->first()) {
             $settings = Setting::where('user_id', auth()->user()->id)->first();
         }
         $config = json_decode($settings->config);
