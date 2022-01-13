@@ -247,6 +247,9 @@ class UsersController extends Controller
             'realtime' => [
                 'liveUserWidget' => 'on',
             ],
+            'campaigns' => [
+                'campaign_active' => 'on',
+            ],
             'events' => [
                 'active' => 'on',
                 'eventTabs' => ['Location', 'Product', 'Video']
