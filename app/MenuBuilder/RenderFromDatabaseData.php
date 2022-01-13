@@ -7,6 +7,8 @@
 namespace App\MenuBuilder;
 use App\MenuBuilder\MenuBuilder;
 use App\Models\Setting;
+use App\Models\ProjectSetting;
+use App\Models\ProjectManagement;
 
 class RenderFromDatabaseData{
 
@@ -90,7 +92,15 @@ class RenderFromDatabaseData{
      * return - array
      */
     public function render($data){
-        $settings = Setting::where('user_id', auth()->user()->id)->first();
+        // $settings = Setting::where('user_id', auth()->user()->id)->first();
+        $projectAnalytics = ProjectManagement::with('project')
+        ->where('user_id', auth()->user()->id)
+        ->where('enabled', true)
+        ->first();
+        $projectID = $projectAnalytics->project->id;
+        if (!$settings = ProjectSetting::where('project_id', $projectID)->where('user_id', auth()->user()->id)->first()) {
+            $settings = Setting::where('user_id', auth()->user()->id)->first();
+        }
         $config = json_decode($settings->config);
         if(!empty($data)){
             $this->setting_config = $config;
