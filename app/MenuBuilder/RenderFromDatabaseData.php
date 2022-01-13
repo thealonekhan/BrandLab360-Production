@@ -50,14 +50,14 @@ class RenderFromDatabaseData{
 
     private function mainLoop(){
         for($i = 0; $i<count($this->data); $i++){
-            if($this->data[$i]['name'] == "Realtime") {
-
-            } else {
-
-            }
             switch ($this->data[$i]['name']) {
                 case 'Realtime':
                     if ($this->setting_config->realtime->liveUserWidget == "on") {
+                        $this->generate_links($this->data, $i);
+                    }
+                    break;
+                case 'Campaigns':
+                    if ($this->setting_config->campaigns->campaign_active == "on") {
                         $this->generate_links($this->data, $i);
                     }
                     break;

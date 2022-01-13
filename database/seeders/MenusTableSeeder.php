@@ -142,6 +142,7 @@ class MenusTableSeeder extends Seeder
         // $this->insertTitle('manager,admin', 'UAT Version 1');
         $this->insertLink('manager,user,admin', 'Dashboard', '/', 'cil-speedometer');
         $this->insertLink('manager,admin,user', 'Realtime', '/realtime/overview', 'cil-history');
+        $this->insertLink('manager,admin,user', 'Campaigns', '/campaigns', 'cil-fork');
         $this->beginDropdown('manager,admin', 'Access Management', 'cil-https');
             // $this->insertLink('admin', 'Notes',                   '/notes');
             $this->insertLink('admin,manager', 'Users', '/users');

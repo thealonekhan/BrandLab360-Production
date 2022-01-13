@@ -105,6 +105,9 @@ class SettingController extends Controller
             "realtime" => [
                 "liveUserWidget" => !empty($request->liveUserWidget) ? $request->liveUserWidget : "off",
             ],
+            "campaigns" => [
+                "campaign_active" => !empty($request->campaign_active) ? $request->campaign_active : "off",
+            ],
             "events" => [
                 "active" => !empty($request->events) ? $request->events : "off",
                 "eventTabs" => $request->eventTabs

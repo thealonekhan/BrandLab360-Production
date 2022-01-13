@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 /*
@@ -15,6 +16,7 @@ use App\Http\Controllers\Auth\LogoutController;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::any('/', [ApplicationController::class, 'index'])->name('dashboard.overview.ajax')->middleware('check.new.user.login');
+    Route::any('/campaigns', [CampaignController::class, 'index'])->name('dashboard.campaign.ajax')->middleware('check.new.user.login');
     Route::any('/audience/overview', 'AudienceController@overview')->name('audience.overview.ajax');
     Route::any('/realtime/overview', 'RealtimeController@overview')->name('realtime.overview.ajax')->middleware('check.new.user.login');
     Route::any('/audience/devices', 'AudienceController@devices')->name('audience.devices.ajax');

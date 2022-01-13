@@ -267,6 +267,30 @@
                                         <!-- card-body -->
                                     </div>
                                     <!-- card -->
+                                    <!-- card -->
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center active">
+                                                    <label class="mr-0 mb-0"><strong>Campaigns:</strong></label>
+                                                    <span class="badge badge-primary badge-pill float-right filters-pill"><a class="filters-parent" href="#"><i class="c-icon c-icon-lg cil-caret-top"></i></a></span>
+                                                </li>
+                                                <ul class="list-group filters-child">
+                                                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                                                        <label class="mr-0 ml-0"><strong>Active:</strong></label>
+                                                        <label class="c-switch c-switch-label c-switch-info c-switch-sm mb-0">
+                                                            <input name="campaign_active" class="c-switch-input c-switch-sm" type="checkbox" {{ $config->campaigns->campaign_active == "on" ? "checked" : "" }}><span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <!-- /UL -->
+                                            </ul>
+                                            <!-- /UL -->
+                                            </div>
+                                        <!-- card-body -->
+                                    </div>
+                                    <!-- card -->
                                 </div>
                                 <!-- col -->
                                 <!-- <div class="col-md-3 col-sm-6 col-xs-12">
