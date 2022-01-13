@@ -92,15 +92,21 @@ class RenderFromDatabaseData{
      * return - array
      */
     public function render($data){
-        // $settings = Setting::where('user_id', auth()->user()->id)->first();
         $projectAnalytics = ProjectManagement::with('project')
         ->where('user_id', auth()->user()->id)
         ->where('enabled', true)
         ->first();
         $projectID = $projectAnalytics->project->id;
-        if (!$settings = ProjectSetting::where('project_id', $projectID)->first()) {
-            $settings = Setting::where('user_id', auth()->user()->id)->first();
+        $settings = null;
+        $project_settings = ProjectSetting::where('project_id', $projectID)->first();
+        $general_settings = Setting::where('user_id', auth()->user()->id)->first();
+
+        if ($project_settings && !$general_settings->override) {
+            $settings = $project_settings;
+        } else {
+            $settings = $general_settings;
         }
+        // dd($settings);
         $config = json_decode($settings->config);
         if(!empty($data)){
             $this->setting_config = $config;
