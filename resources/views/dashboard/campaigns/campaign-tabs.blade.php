@@ -16,14 +16,14 @@
                     <th>Bounce Rate</th>
                     <th>Avg. Session Durartion</th>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th></th>
                     <th>{{$gaAcquisitionCampaign->totalsForAllResults['ga:users']}}</th>
                     <th>{{$gaAcquisitionCampaign->totalsForAllResults['ga:newUsers']}}</th>
                     <th>{{$gaAcquisitionCampaign->totalsForAllResults['ga:sessions']}}</th>
                     <th>{{round($gaAcquisitionCampaign->totalsForAllResults['ga:bounceRate'], 2)}}</th>
                     <th>{{round($gaAcquisitionCampaign->totalsForAllResults['ga:avgSessionDuration'], 2)}}</th>
-                </tr>
+                </tr> -->
                 </thead>
                 <tbody>
                 @if(!empty($gaAcquisitionCampaign->rows))
@@ -55,14 +55,14 @@
                     <th>Bounce Rate</th>
                     <th>Avg. Session Durartion</th>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th></th>
                     <th>{{$gaAcquisitionSource->totalsForAllResults['ga:users']}}</th>
                     <th>{{$gaAcquisitionSource->totalsForAllResults['ga:newUsers']}}</th>
                     <th>{{$gaAcquisitionSource->totalsForAllResults['ga:sessions']}}</th>
                     <th>{{round($gaAcquisitionSource->totalsForAllResults['ga:bounceRate'], 2)}}</th>
                     <th>{{round($gaAcquisitionSource->totalsForAllResults['ga:avgSessionDuration'], 2)}}</th>
-                </tr>
+                </tr> -->
                 </thead>
                 <tbody>
                 @if(!empty($gaAcquisitionSource->rows))
@@ -94,14 +94,14 @@
                     <th>Bounce Rate</th>
                     <th>Avg. Session Durartion</th>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th></th>
                     <th>{{$gaAcquisitionMedium->totalsForAllResults['ga:users']}}</th>
                     <th>{{$gaAcquisitionMedium->totalsForAllResults['ga:newUsers']}}</th>
                     <th>{{$gaAcquisitionMedium->totalsForAllResults['ga:sessions']}}</th>
                     <th>{{round($gaAcquisitionMedium->totalsForAllResults['ga:bounceRate'], 2)}}</th>
                     <th>{{round($gaAcquisitionMedium->totalsForAllResults['ga:avgSessionDuration'], 2)}}</th>
-                </tr>
+                </tr> -->
                 </thead>
                 <tbody>
                 @if(!empty($gaAcquisitionMedium->rows))
