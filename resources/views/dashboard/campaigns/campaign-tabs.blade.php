@@ -67,7 +67,7 @@
                 <tbody>
                 @if(!empty($gaAcquisitionSource->rows))
                 @foreach($gaAcquisitionSource->rows as $source)
-                @if($campaign[0] != '(direct)')
+                @if($source[0] != '(direct)')
                 <tr>
                     <td>{{$source[0]}}</td>
                     <td>{{$source[5]}}</td>
@@ -106,7 +106,7 @@
                 <tbody>
                 @if(!empty($gaAcquisitionMedium->rows))
                 @foreach($gaAcquisitionMedium->rows as $medium)
-                @if($campaign[0] != '(none)')
+                @if($medium[0] != '(none)')
                 <tr>
                     <td>{{$medium[0]}}</td>
                     <td>{{$medium[5]}}</td>
